@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/Group-Finder-Uninonve/static/js/main.9acacc2d.js",
+    "main.js": "/Group-Finder-Uninonve/static/js/main.ff4b95bc.js",
     "index.html": "/Group-Finder-Uninonve/index.html",
-    "main.9acacc2d.js.map": "/Group-Finder-Uninonve/static/js/main.9acacc2d.js.map"
+    "main.ff4b95bc.js.map": "/Group-Finder-Uninonve/static/js/main.ff4b95bc.js.map"
   },
   "entrypoints": [
-    "static/js/main.9acacc2d.js"
+    "static/js/main.ff4b95bc.js"
   ]
 }
