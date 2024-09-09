@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Group } from '../domain/group';
-
+import { User } from '../domain/user';
 interface CardGroupProps {
   group: Group;
 }
 
 export function CardGroup({ group }: CardGroupProps) {
+  const [members, setMembers] = useState<User[]>(group.members);
+
+  function addMember() {
+    const newMember = { name: 'New Member', email: '', phone: '' };
+    setMembers([...members, newMember]);
+  }
+
   return (
-    <div style={{backgroundColor:'red', width:'200px'}}>
+    <div style={{ backgroundColor: 'red', width: '200px' }}>
       <h1>{group.name}</h1>
       <p>{group.description}</p>
       <p>{group.date}</p>
@@ -18,13 +25,13 @@ export function CardGroup({ group }: CardGroupProps) {
         ))}
       </p>
       <p>
-        {group.members.map((member, index) => (
-          <span key={index}>{member.name}</span>
+        {members.map((member, index) => (
+          <p key={index}>{member.name}</p>
         ))}
       </p>
       <p>{group.owner}</p>
       <p>{group.id}</p>
-      <button>+</button>
+      <button onClick={addMember}>Adicionar Membro</button>
     </div>
   );
 }

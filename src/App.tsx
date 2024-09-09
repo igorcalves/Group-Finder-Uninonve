@@ -14,10 +14,10 @@ function App() {
       name,
       description,
       date: new Date().toISOString().split('T')[0],
-      discipline: 'Unknown',
+      discipline: 'Projeto',
       tags: [],
       members: [],
-      owner: 'Unknown',
+      owner: 'User',
       id: `group${groups.length + 1}`,
     };
     setGroups([...groups, newGroup]);
