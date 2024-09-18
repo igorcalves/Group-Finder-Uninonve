@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Group } from '../../domain/group';
 import { User } from '../../domain/user';
 import './styles.css';
+import PrimaryButton from '../button/primaryButton';
 interface CardGroupProps {
   group: Group;
 }
@@ -10,6 +11,10 @@ export function CardGroup({ group }: CardGroupProps) {
   const [members, setMembers] = useState<User[]>(group.members);
 
   function addMember() {
+    if (members.length >= 5) {
+      alert('Limite de membros atingido');
+      return;
+    }
     const newMember = { name: 'New Member', email: '', phone: '' };
     setMembers([...members, newMember]);
   }
@@ -32,7 +37,7 @@ export function CardGroup({ group }: CardGroupProps) {
       </p>
       <p>{group.owner}</p>
       <p>{group.id}</p>
-      <button onClick={addMember}>Adicionar Membro</button>
+      <PrimaryButton onClick={addMember}>Adicionar</PrimaryButton>
     </div>
   );
 }

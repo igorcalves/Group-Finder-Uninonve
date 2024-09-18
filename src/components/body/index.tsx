@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import AddBox from '@mui/icons-material/AddBox';
 import CardGroup from '../cardGroup';
 import './styles.css';
+import { Group } from '../../domain/group';
 
 const Body: React.FC = () => {
   const [groups, setGroups] = useState<any[]>([]);
+  const [name, setName] = useState('teste');
+  const [description, setDescription] = useState('testes');
 
-  const createGroup = () => {
-    const newGroup = {
-      description: '',
+  function createGroup() {
+    const newGroup: Group = {
+      name,
+      description,
       date: new Date().toISOString().split('T')[0],
       discipline: 'Projeto',
       tags: [],
@@ -17,7 +21,7 @@ const Body: React.FC = () => {
       id: `group${groups.length + 1}`,
     };
     setGroups([...groups, newGroup]);
-  };
+  }
 
   return (
     <div className="body">
