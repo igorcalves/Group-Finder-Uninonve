@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Group } from '../domain/group';
-import { User } from '../domain/user';
+import { Group } from '../../domain/group';
+import { User } from '../../domain/user';
+import './styles.css';
 interface CardGroupProps {
   group: Group;
 }
@@ -14,7 +15,7 @@ export function CardGroup({ group }: CardGroupProps) {
   }
 
   return (
-    <div style={{ backgroundColor: 'red', width: '200px' }}>
+    <div className="card-Body">
       <h1>{group.name}</h1>
       <p>{group.description}</p>
       <p>{group.date}</p>
