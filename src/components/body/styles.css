@@ -3,4 +3,12 @@
   justify-content: center;
   align-items: center;
   height: 70vh;
+  flex-direction: column;
+}
+
+.input-container {
+  display: flex;
+}
+input {
+  width: 300px;
 }

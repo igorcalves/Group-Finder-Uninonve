@@ -8,3 +8,13 @@
   display: absolute;
   margin-left: 25px;
 }
+
+.disabled-button {
+  background-color: gray;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: absolute;
+  margin-left: 25px;
+}
