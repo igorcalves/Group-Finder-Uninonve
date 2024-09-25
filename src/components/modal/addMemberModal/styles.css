@@ -23,9 +23,14 @@
 .close-btn {
     display: flex;
     margin-left: auto;
-    justify-self: flex-end;
+    justify-self: space-between;
 }
-
+.close-btn h1 {
+    display: flex;
+    position: relative;
+    left: -38px;
+    margin: 0;
+}
 .close-btn:hover {
     cursor: pointer;
 }

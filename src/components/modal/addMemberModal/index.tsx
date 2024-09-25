@@ -35,6 +35,7 @@ const AddMemberModal: React.FC<AddMemberModalProps> = ({
         <div className="background-modal">
             <div className="add-modal-container">
                 <div className="close-btn">
+                    <h1>Adicionar Integrante</h1>
                     <Close onClick={() => setShowModal(false)} />
                 </div>
                 <PrimaryInput
