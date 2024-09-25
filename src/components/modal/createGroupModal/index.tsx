@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import './styles.css';
-import PrimaryInput from '../input';
-import PrimaryButton from '../button/primaryButton';
+import PrimaryInput from '../../input';
+import PrimaryButton from '../../button/primaryButton';
 import CloseBtn from '@mui/icons-material/Close';
 interface CreateGroupModalProps {
     isVisible: boolean;

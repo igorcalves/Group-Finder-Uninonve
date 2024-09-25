@@ -1,0 +1,31 @@
+.add-modal-container {
+    display: flex;
+    position: absolute;
+    height: auto;
+    width: auto;
+    background-color: white;
+    flex-direction: column;
+    gap: 30px;
+    padding: 30px;
+    border-radius: 7px;
+}
+
+.add-modal-container button {
+    margin: 0;
+}
+
+.add-modal-container .button-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.close-btn {
+    display: flex;
+    margin-left: auto;
+    justify-self: flex-end;
+}
+
+.close-btn:hover {
+    cursor: pointer;
+}

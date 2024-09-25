@@ -1,13 +1,12 @@
-import { User } from "./user";
+import { User } from './user';
 
 export interface Group {
     name: string;
     description: string;
-    members: User[];
+    members?: User[];
     date: string;
     discipline: string;
     tags: string[];
-    owner: string;
+    owner: User | undefined;
     id: string;
-  }
-  
+}

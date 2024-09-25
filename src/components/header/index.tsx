@@ -1,13 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './styles.css';
+import { MenuBook, Logout } from '@mui/icons-material';
+import { DISCIPLINES } from '../../constants/disciplines';
+import DropDownMenu from '../dropdownMenu/DropDownMenu';
+import CreateGroup from '../createGroup';
+
 const Header: React.FC = () => {
-  return (
-    <div className="header">
-      <h1>Cc</h1>
-      <h1>Tads</h1>
-      <h1>Es</h1>
-    </div>
-  );
+    const [headerTitle, setHeaderTitle] = useState('');
+    return (
+        <div className="header">
+            <div className="header-section left">
+                <div className="icon-test"></div>
+            </div>
+            <div className="header-section center">
+                <h1>{headerTitle}</h1>
+            </div>
+            <div className="header-section right">
+                <CreateGroup />
+                <DropDownMenu
+                    setHeaderTitle={setHeaderTitle}
+                    content={DISCIPLINES}
+                    IconComponent={MenuBook}
+                />
+                <Logout className="icon-logout" />
+            </div>
+        </div>
+    );
 };
 
 export default Header;

@@ -1,11 +1,15 @@
 input {
-  padding: 10px;
-  height: 20px;
-  width: 270px;
-  border: 2.5px solid;
-  border-radius: 7px;
+    padding: 10px;
+    height: 20px;
+    width: 270px;
+    border: 2.5px solid;
+    border-radius: 7px;
 }
 input:focus {
-  border: 2.5px solid #01b3ff;
-  outline: none;
+    border: 2.5px solid #01b3ff;
+    outline: none;
+}
+
+input:hover {
+    border: 2.5px solid #01b3ff;
 }

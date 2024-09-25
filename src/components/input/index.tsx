@@ -2,18 +2,28 @@ import React, { Dispatch, SetStateAction } from 'react';
 import './styles.css';
 
 interface InputProps {
-  placeholder: string;
-  setContent: Dispatch<SetStateAction<string>>;
+    placeholder: string;
+    setContent: Dispatch<SetStateAction<string>>;
+    widthP?: string;
 }
 
-const PrimaryInput: React.FC<InputProps> = ({ placeholder, setContent }) => {
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setContent(event.target.value);
-  };
+const PrimaryInput: React.FC<InputProps> = ({
+    placeholder,
+    setContent,
+    widthP,
+}) => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setContent(event.target.value);
+    };
 
-  return (
-    <input type="text" placeholder={placeholder} onChange={handleChange} />
-  );
+    return (
+        <input
+            style={{ width: widthP }}
+            type="text"
+            placeholder={placeholder}
+            onChange={handleChange}
+        />
+    );
 };
 
 export default PrimaryInput;

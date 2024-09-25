@@ -1,12 +1,63 @@
 .header {
-  padding: 20px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-direction: row;
-  margin-bottom: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  gap: 20px;
-  background: linear-gradient(90deg, #01b3ff, #0463b1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    height: 100px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(90deg, #01b3ff, #0463b1);
+}
+
+.header-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-section.left {
+    flex: 0.3;
+
+    justify-content: flex-start;
+}
+.header-section.left:hover {
+    cursor: pointer;
+}
+
+.header-section.center {
+    flex: 3;
+    justify-content: center;
+    height: 100%;
+}
+
+.header-section.right {
+    height: 100%;
+    justify-content: flex-end;
+    padding: 0 30px;
+    position: relative;
+}
+
+.icon-test {
+    height: 30px;
+    width: 30px;
+    background-color: red;
+}
+.icon-book {
+    color: white;
+}
+
+.icon-book:hover {
+    cursor: pointer;
+}
+
+.book-container {
+    height: 100%;
+}
+
+.icon-logout {
+    color: white;
+}
+
+.icon-logout:hover {
+    cursor: pointer;
 }

@@ -3,43 +3,63 @@ import { Group } from '../../domain/group';
 import { User } from '../../domain/user';
 import './styles.css';
 import PrimaryButton from '../button/primaryButton';
+import PersonIcon from '@mui/icons-material/Person';
+import MemberModal from '../modal/memberModal';
+import AddMemberModal from '../modal/addMemberModal';
 interface CardGroupProps {
-  group: Group;
+    group: Group;
 }
 
 export function CardGroup({ group }: CardGroupProps) {
-  const [members, setMembers] = useState<User[]>(group.members);
-
-  function addMember() {
-    if (members.length >= 5) {
-      alert('Limite de membros atingido');
-      return;
+    const [members, setMembers] = useState<User[]>(group.members || []);
+    const [showModal, setShowModal] = useState(false);
+    const [showAddMemberModal, setShowAddMemberModal] = useState(false);
+    const sizeMax = 5;
+    function addMember() {
+        setShowAddMemberModal(true);
     }
-    const newMember = { name: 'New Member', email: '', phone: '' };
-    setMembers([...members, newMember]);
-  }
 
-  return (
-    <div className="card-Body">
-      <h1>{group.name}</h1>
-      <p>{group.description}</p>
-      <p>{group.date}</p>
-      <p>{group.discipline}</p>
-      <p>
-        {group.tags.map((tag, index) => (
-          <span key={index}>{tag}</span>
-        ))}
-      </p>
-      <p>
-        {members.map((member, index) => (
-          <p key={index}>{member.name}</p>
-        ))}
-      </p>
-      <p>{group.owner}</p>
-      <p>{group.id}</p>
-      <PrimaryButton onClick={addMember}>Adicionar</PrimaryButton>
-    </div>
-  );
+    return (
+        <div className="card-Body">
+            <div className="icon-container">
+                <div className="icon-click" onClick={() => setShowModal(true)}>
+                    <PersonIcon />
+                    <p>
+                        {members.length}/{sizeMax}
+                    </p>
+                </div>
+            </div>
+            <h1>{group.name}</h1>
+            <p>{group.description}</p>
+            <p>{group.date}</p>
+            <p>{group.discipline}</p>
+            <p>
+                {group.tags.map((tag, index) => (
+                    <span key={index}>{tag}</span>
+                ))}
+            </p>
+
+            <p>{group.owner?.name}</p>
+            <p>{group.id}</p>
+            <PrimaryButton
+                onClick={addMember}
+                disabled={!(members.length < sizeMax)}
+            >
+                {members.length < sizeMax ? 'Adicionar' : 'Lotado'}
+            </PrimaryButton>
+            {showModal && (
+                <MemberModal setShowModal={setShowModal} members={members} />
+            )}
+
+            {showAddMemberModal && (
+                <AddMemberModal
+                    setShowModal={setShowAddMemberModal}
+                    members={members}
+                    setMembers={setMembers}
+                />
+            )}
+        </div>
+    );
 }
 
 export default CardGroup;

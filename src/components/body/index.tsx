@@ -1,80 +1,54 @@
-import React, { useState } from 'react';
-import AddBox from '@mui/icons-material/AddBox';
+import React, { useEffect } from 'react';
 import CardGroup from '../cardGroup';
 import './styles.css';
-import { Group } from '../../domain/group';
-import CreateGroupModal from '../modal/CreateGroupModal';
 import PrimaryInput from '../input';
+import { useGlobalContext } from '../../context';
 
 const Body: React.FC = () => {
-    const [groups, setGroups] = useState<Group[]>([]);
-    const [name, setName] = useState<string>('');
-    const [description, setDescription] = useState<string>('');
-    const [showModal, setShowModal] = useState<boolean>(false);
+    const { groups } = useGlobalContext();
+    const [search, setSearch] = React.useState('');
+    const [filteredGroups, setFilteredGroups] = React.useState(groups);
 
-    function createGroup() {
-        const newGroup: Group = {
-            name,
-            description,
-            date: new Date().toISOString().split('T')[0],
-            discipline: 'Projeto',
-            tags: [],
-            members: [],
-            owner: 'User',
-            id: `group${groups.length + 1}`,
-        };
-        setGroups([...groups, newGroup]);
-        setShowModal(false);
-        clearField();
-    }
+    const searhForGroups = (search: string) => {
+        return groups.filter((group) => {
+            return group.name.toLowerCase().includes(search.toLowerCase());
+        });
+    };
 
-    function clearField() {
-        setName('');
-        setDescription('');
-    }
+    useEffect(() => {
+        setFilteredGroups(handleSearch(search));
+    }, [search]);
+
+    useEffect(() => {
+        setFilteredGroups(groups);
+    }, [groups]);
+
+    const handleSearch = (search: string) => {
+        if (search === '') {
+            return groups;
+        }
+
+        return searhForGroups(search);
+    };
 
     return (
         <div className="body">
             <div className="input-container">
                 <PrimaryInput
+                    setContent={setSearch}
                     placeholder="Buscar Grupos"
-                    setContent={() => console}
-                />
-                <AddBox
-                    onClick={() => setShowModal(true)}
-                    style={{
-                        cursor: 'pointer',
-                        fontSize: '40px',
-                        color: '#01b3ff',
-                    }}
+                    widthP="800px"
                 />
             </div>
-            {groups.length === 0 && (
-                <>
-                    <h1>Não exite nenhum grupo</h1>
-                </>
-            )}
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    gap: '20px',
-                    marginTop: '20px',
-                }}
-            >
-                {groups.map((group, index) => (
-                    <CardGroup key={index} group={group} />
-                ))}
+            <div className="groups-cards">
+                {filteredGroups.length > 0 ? (
+                    filteredGroups.map((group) => (
+                        <CardGroup key={group.id} group={group} />
+                    ))
+                ) : (
+                    <h1>Não existe nenhum grupo registrado...</h1>
+                )}
             </div>
-            <CreateGroupModal
-                isVisible={showModal}
-                setName={setName}
-                name={name}
-                description={description}
-                setDescription={setDescription}
-                handleButton={createGroup}
-                handleCloseModal={() => setShowModal(false)}
-            />
         </div>
     );
 };
