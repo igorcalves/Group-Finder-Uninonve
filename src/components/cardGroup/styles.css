@@ -15,7 +15,7 @@
     font-weight: 100;
 }
 .card-Body:hover {
-    box-shadow: 0 0 10px rgba(221, 166, 13, 0.9);
+    box-shadow: 0 0 10px blue;
 }
 
 .icon-container {
