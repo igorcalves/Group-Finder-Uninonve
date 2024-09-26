@@ -21,6 +21,7 @@
     flex-direction: column;
     border-radius: 7px;
     gap: 20px;
+    padding: 20px;
 }
 
 button {
@@ -30,8 +31,19 @@ button {
 }
 
 .close-button {
-    position: relative;
-    top: -300px;
-    left: 140px;
+    position: absolute;
+    right: 20px;
     cursor: pointer;
+}
+
+.title-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.title-container h1 {
+    text-align: center;
+    flex: 1;
 }

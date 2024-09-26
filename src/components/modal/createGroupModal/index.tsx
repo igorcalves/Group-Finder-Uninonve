@@ -26,7 +26,13 @@ const CreateGroupModal: React.FC<CreateGroupModalProps> = ({
     return (
         <div className="background-container">
             <div className="modal-container">
-                <h1>Criar grupo</h1>
+                <div className="title-container">
+                    <h1>Criar grupo</h1>
+                    <CloseBtn
+                        className="close-button"
+                        onClick={handleCloseModal}
+                    />
+                </div>
                 <PrimaryInput
                     placeholder="Nome do grupo"
                     setContent={setName}
@@ -42,7 +48,6 @@ const CreateGroupModal: React.FC<CreateGroupModalProps> = ({
                 >
                     Criar
                 </PrimaryButton>
-                <CloseBtn className="close-button" onClick={handleCloseModal} />
             </div>
         </div>
     );

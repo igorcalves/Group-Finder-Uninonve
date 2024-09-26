@@ -2,11 +2,10 @@
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 5px;
     border-radius: 5px;
     cursor: pointer;
     display: absolute;
-    margin-left: 25px;
     border: 2px solid black;
 }
 
@@ -17,5 +16,9 @@
     padding: 10px 20px;
     border-radius: 5px;
     display: absolute;
-    margin-left: 25px;
+}
+
+.disabled-button:hover {
+    opacity: 1;
+    cursor: not-allowed;
 }

@@ -51,7 +51,10 @@ const AddMemberModal: React.FC<AddMemberModalProps> = ({
                     setContent={setPhone}
                 />
                 <div className="button-container">
-                    <PrimaryButton onClick={addNewMember}>
+                    <PrimaryButton
+                        disabled={name === '' || email === '' || phone === ''}
+                        onClick={addNewMember}
+                    >
                         Adicionar
                     </PrimaryButton>
                 </div>

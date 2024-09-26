@@ -6,6 +6,8 @@ import PrimaryButton from '../button/primaryButton';
 import PersonIcon from '@mui/icons-material/Person';
 import MemberModal from '../modal/memberModal';
 import AddMemberModal from '../modal/addMemberModal';
+import ArticleIcon from '@mui/icons-material/Article';
+import TextModal from '../modal/textModal';
 interface CardGroupProps {
     group: Group;
 }
@@ -14,6 +16,7 @@ export function CardGroup({ group }: CardGroupProps) {
     const [members, setMembers] = useState<User[]>(group.members || []);
     const [showModal, setShowModal] = useState(false);
     const [showAddMemberModal, setShowAddMemberModal] = useState(false);
+    const [showDescription, setShowDescription] = useState(false);
     const sizeMax = 5;
     function addMember() {
         setShowAddMemberModal(true);
@@ -30,7 +33,13 @@ export function CardGroup({ group }: CardGroupProps) {
                 </div>
             </div>
             <h1>{group.name}</h1>
-            <p>{group.description}</p>
+            <div
+                className="description-container"
+                onClick={() => setShowDescription(true)}
+            >
+                <ArticleIcon />
+                <p>descrição</p>
+            </div>
             <p>{group.date}</p>
             <p>{group.discipline}</p>
             <p>
@@ -41,12 +50,14 @@ export function CardGroup({ group }: CardGroupProps) {
 
             <p>{group.owner?.name}</p>
             <p>{group.id}</p>
-            <PrimaryButton
-                onClick={addMember}
-                disabled={!(members.length < sizeMax)}
-            >
-                {members.length < sizeMax ? 'Adicionar' : 'Lotado'}
-            </PrimaryButton>
+            <div className="btn-container">
+                <PrimaryButton
+                    onClick={addMember}
+                    disabled={!(members.length < sizeMax)}
+                >
+                    {members.length < sizeMax ? 'Solicitar entrada' : 'Lotado'}
+                </PrimaryButton>
+            </div>
             {showModal && (
                 <MemberModal setShowModal={setShowModal} members={members} />
             )}
@@ -56,6 +67,12 @@ export function CardGroup({ group }: CardGroupProps) {
                     setShowModal={setShowAddMemberModal}
                     members={members}
                     setMembers={setMembers}
+                />
+            )}
+            {showDescription && (
+                <TextModal
+                    text={group.description}
+                    handleCloseModal={() => setShowDescription(false)}
                 />
             )}
         </div>

@@ -3,6 +3,8 @@ import { Group } from '../domain/group';
 import { User } from '../domain/user';
 
 interface GlobalContextProps {
+    currentPage: string;
+    setCurrentPage: (page: string) => void;
     groups: Group[];
     setGroups: React.Dispatch<React.SetStateAction<Group[]>>;
     user: User | undefined;
@@ -15,6 +17,7 @@ const GlobalContext = createContext<GlobalContextProps | undefined>(undefined);
 export const GlobalProvider: React.FC<{ children: ReactNode }> = ({
     children,
 }) => {
+    const [currentPage, setCurrentPage] = useState('login');
     const [groups, setGroups] = useState<Group[]>([]);
     const [user, setUser] = useState<User | undefined>(undefined);
 
@@ -24,7 +27,15 @@ export const GlobalProvider: React.FC<{ children: ReactNode }> = ({
 
     return (
         <GlobalContext.Provider
-            value={{ groups, setGroups, user, setUser, addGroups }}
+            value={{
+                currentPage,
+                setCurrentPage,
+                groups,
+                setGroups,
+                user,
+                setUser,
+                addGroups,
+            }}
         >
             {children}
         </GlobalContext.Provider>

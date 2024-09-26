@@ -1,18 +1,20 @@
 .card-Body {
+    display: flex;
     justify-content: center;
-    align-items: center;
     flex-direction: column;
     background-color: #01b3ff;
     padding: 20px;
     border-radius: 20px;
     width: 150px;
-    height: 400px;
+    height: 320px;
     overflow: hidden;
     margin-bottom: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
     border: 2px solid black;
+    gap: 10px;
 }
 .card-Body:hover {
-    box-shadow: 0 0 10px rgba(13, 110, 221, 0.9);
+    box-shadow: 0 0 10px rgba(221, 166, 13, 0.9);
 }
 
 .icon-container {
@@ -31,4 +33,22 @@
 
 .card-Body h1 {
     font-size: 23px;
+}
+
+.btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+}
+
+.description-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.description-container:hover {
+    cursor: pointer;
 }

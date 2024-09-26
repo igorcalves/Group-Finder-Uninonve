@@ -4,9 +4,11 @@ import { MenuBook, Logout } from '@mui/icons-material';
 import { DISCIPLINES } from '../../constants/disciplines';
 import DropDownMenu from '../dropdownMenu/DropDownMenu';
 import CreateGroup from '../createGroup';
+import { useGlobalContext } from '../../context';
 
 const Header: React.FC = () => {
     const [headerTitle, setHeaderTitle] = useState('');
+    const { setCurrentPage } = useGlobalContext();
     return (
         <div className="header">
             <div className="header-section left">
@@ -22,7 +24,10 @@ const Header: React.FC = () => {
                     content={DISCIPLINES}
                     IconComponent={MenuBook}
                 />
-                <Logout className="icon-logout" />
+                <Logout
+                    onClick={() => setCurrentPage('login')}
+                    className="icon-logout"
+                />
             </div>
         </div>
     );
