@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/Group-Finder-Uninonve/static/css/main.3090236a.css",
+    "main.css": "/Group-Finder-Uninonve/static/css/main.cb45b11c.css",
     "main.js": "/Group-Finder-Uninonve/static/js/main.80844e0a.js",
     "static/media/sapiens.png": "/Group-Finder-Uninonve/static/media/sapiens.be6b8c3c6eb08471a25e.png",
     "index.html": "/Group-Finder-Uninonve/index.html",
-    "main.3090236a.css.map": "/Group-Finder-Uninonve/static/css/main.3090236a.css.map",
+    "main.cb45b11c.css.map": "/Group-Finder-Uninonve/static/css/main.cb45b11c.css.map",
     "main.80844e0a.js.map": "/Group-Finder-Uninonve/static/js/main.80844e0a.js.map"
   },
   "entrypoints": [
-    "static/css/main.3090236a.css",
+    "static/css/main.cb45b11c.css",
     "static/js/main.80844e0a.js"
   ]
 }
