@@ -11,7 +11,7 @@ const AppContent: React.FC = () => {
             case 'home':
                 return <Home />;
             case 'login':
-                return <Home />;
+                return <Login />;
             default:
                 return <Home />;
         }
