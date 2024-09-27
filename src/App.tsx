@@ -17,7 +17,7 @@ const AppContent: React.FC = () => {
         }
     };
 
-    return <div>{renderPage()}</div>;
+    return <div className="all">{renderPage()}</div>;
 };
 
 function App() {

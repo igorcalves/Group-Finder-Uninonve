@@ -34,29 +34,38 @@ const AddMemberModal: React.FC<AddMemberModalProps> = ({
     return (
         <div className="background-modal">
             <div className="add-modal-container">
-                <div className="close-btn">
+                <div className="modal-header">
                     <h1>Adicionar Integrante</h1>
-                    <Close onClick={() => setShowModal(false)} />
+                    <Close
+                        className="close-icon"
+                        onClick={() => setShowModal(false)}
+                    />
                 </div>
-                <PrimaryInput
-                    placeholder="Digite seu nome"
-                    setContent={setName}
-                />
-                <PrimaryInput
-                    placeholder="Digite seu email"
-                    setContent={setEmail}
-                />
-                <PrimaryInput
-                    placeholder="Digite seu telefone"
-                    setContent={setPhone}
-                />
-                <div className="button-container">
-                    <PrimaryButton
-                        disabled={name === '' || email === '' || phone === ''}
-                        onClick={addNewMember}
-                    >
-                        Adicionar
-                    </PrimaryButton>
+                <div className="modal-body">
+                    <PrimaryInput
+                        placeholder="Digite seu nome"
+                        setContent={setName}
+                    />
+                    <PrimaryInput
+                        placeholder="Digite seu email"
+                        setContent={setEmail}
+                    />
+                    <PrimaryInput
+                        placeholder="Digite seu telefone"
+                        setContent={setPhone}
+                    />
+                    <div className="button-container">
+                        <PrimaryButton
+                            disabled={
+                                name === '' || email === '' || phone === ''
+                            }
+                            onClick={addNewMember}
+                            widthP="290px"
+                            colorP="#006d9b"
+                        >
+                            Adicionar
+                        </PrimaryButton>
+                    </div>
                 </div>
             </div>
         </div>

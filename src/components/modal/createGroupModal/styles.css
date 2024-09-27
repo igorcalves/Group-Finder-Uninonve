@@ -14,36 +14,20 @@
 .modal-container {
     display: flex;
     background-color: white;
-    height: auto;
+    height: 250px;
     width: 350px;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    border-radius: 7px;
+    border-radius: 12px;
     gap: 20px;
-    padding: 20px;
+    overflow: hidden;
 }
 
-.modal-container button {
-    margin-top: 30px;
-    align-self: flex-end;
-    margin-right: 30px;
-}
-
-.close-button {
-    position: absolute;
-    right: 20px;
-    cursor: pointer;
-}
-
-.title-container {
-    display: flex;
-    align-items: center;
-    position: relative;
+.modal-header {
     width: 100%;
-}
-
-.title-container h1 {
-    text-align: center;
-    flex: 1;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    padding: 20px;
+    box-sizing: border-box;
 }

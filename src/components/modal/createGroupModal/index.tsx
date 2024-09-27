@@ -26,28 +26,32 @@ const CreateGroupModal: React.FC<CreateGroupModalProps> = ({
     return (
         <div className="background-container">
             <div className="modal-container">
-                <div className="title-container">
+                <div className="modal-header">
                     <h1>Criar grupo</h1>
                     <CloseBtn
-                        className="close-button"
+                        className="close-icon"
                         onClick={handleCloseModal}
                     />
                 </div>
-                <PrimaryInput
-                    placeholder="Nome do grupo"
-                    setContent={setName}
-                />
-                <PrimaryInput
-                    placeholder="Descrição do grupo"
-                    setContent={setDescription}
-                />
+                <div className="modal-body">
+                    <PrimaryInput
+                        placeholder="Nome do grupo"
+                        setContent={setName}
+                    />
+                    <PrimaryInput
+                        placeholder="Descrição do grupo"
+                        setContent={setDescription}
+                    />
 
-                <PrimaryButton
-                    onClick={handleButton}
-                    disabled={name === '' || description === ''}
-                >
-                    Criar
-                </PrimaryButton>
+                    <PrimaryButton
+                        onClick={handleButton}
+                        disabled={name === '' || description === ''}
+                        widthP="290px"
+                        colorP="#006d9b"
+                    >
+                        Criar Grupo
+                    </PrimaryButton>
+                </div>
             </div>
         </div>
     );

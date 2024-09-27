@@ -6,6 +6,7 @@ interface PrimaryButtonProps {
     children: React.ReactNode;
     disabled?: boolean;
     widthP?: string;
+    colorP?: string;
 }
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
@@ -13,13 +14,17 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
     children,
     disabled,
     widthP,
+    colorP,
 }) => {
     return (
         <button
             className={disabled ? 'disabled-button' : 'primary-button '}
             onClick={onClick}
             disabled={disabled}
-            style={{ width: widthP }}
+            style={{
+                width: widthP,
+                backgroundColor: disabled ? 'gray' : colorP,
+            }}
         >
             <span>{children}</span>
         </button>

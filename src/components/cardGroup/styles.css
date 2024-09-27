@@ -3,56 +3,67 @@
     justify-content: flex-start;
     flex-direction: column;
     background-color: white;
-    border-radius: 20px;
+    border-radius: 12px;
     width: 300px;
-    height: 320px;
+    height: 340px;
     overflow: hidden;
     margin-bottom: 30px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
     color: black;
 }
 
-.card-header{
-    background-color: blue;
-    display:flex;
+.card-header {
+    background-color: #006d9b;
+    display: flex;
     flex-direction: row;
     width: auto;
     padding: 20px;
     justify-content: space-between;
     align-items: center;
-    flex:0.5
-
+    flex: 0.5;
+    color: white;
+}
+.card-header {
+    font-size: 14px;
 }
 
-.group-container{
-    display:flex;
+.card-header p {
+    font-size: 14px;
+    font-weight: bold;
+}
+.card-header .group-container {
+    display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
 }
-.card-body{
+.card-body {
     width: auto;
     padding: 20px;
-    flex:2
-
+    flex: 2;
+    overflow: hidden;
 }
 
-.card-footer{
-    display:flex;
+.card-footer {
+    display: flex;
     width: auto;
     padding: 20px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    flex: 1
+    flex: 1;
 }
-
-
+.card-footer .btn-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    gap: 10px;
+}
 .card-Body:hover {
     box-shadow: 0 0 10px blue;
 }
-
 
 .icon-click {
     display: flex;
@@ -65,8 +76,6 @@
     font-size: 26px;
 }
 
-
-
 .description-container {
     display: flex;
     flex-direction: row;
@@ -76,4 +85,23 @@
 
 .description-container:hover {
     cursor: pointer;
+}
+
+.discipline-container h2 {
+    font-size: 20px;
+}
+
+.discipline-container p {
+    font-size: 13px;
+    color: gray;
+    opacity: 0.7;
+}
+
+.description {
+    font-size: 13px;
+    opacity: 0.7;
+    color: gray;
+    word-wrap: break-word;
+    word-break: break-word;
+    margin-top: 10px;
 }

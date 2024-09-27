@@ -27,7 +27,7 @@ const CreateGroup: React.FC = () => {
             };
             newGroups.push({
                 name: `Group ${i}`,
-                description: `Description ${i}`,
+                description: `DescriptionDes criptionDescri ptionDescrip tionDescription DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription ${i}`,
                 date: new Date().toISOString().split('T')[0],
                 discipline: 'Projeto',
                 tags: [],
