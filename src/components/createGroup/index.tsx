@@ -19,7 +19,7 @@ const CreateGroup: React.FC = () => {
 
     function createGroup() {
         const newGroups: Group[] = [];
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 100; i++) {
             const user: User = {
                 name: `User${i}`,
                 email: `teste${i}@teste.com`,

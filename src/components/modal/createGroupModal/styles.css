@@ -24,7 +24,7 @@
     padding: 20px;
 }
 
-button {
+.modal-container button {
     margin-top: 30px;
     align-self: flex-end;
     margin-right: 30px;

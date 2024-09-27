@@ -7,6 +7,8 @@ import PersonIcon from '@mui/icons-material/Person';
 import MemberModal from '../modal/memberModal';
 import AddMemberModal from '../modal/addMemberModal';
 import ArticleIcon from '@mui/icons-material/Article';
+import { Groups, Maximize } from '@mui/icons-material';
+
 import TextModal from '../modal/textModal';
 interface CardGroupProps {
     group: Group;
@@ -23,40 +25,34 @@ export function CardGroup({ group }: CardGroupProps) {
     }
 
     return (
-        <div className="card-Body">
-            <div className="icon-container">
-                <div className="icon-click" onClick={() => setShowModal(true)}>
-                    <PersonIcon />
-                    <p>
-                        {members.length}/{sizeMax}
-                    </p>
+        <div className="card-container">
+            <div className="card-header"> 
+                {group.name}
+                <div className="group-container">
+                    <Groups/> 
+                    {members.length}/{sizeMax}
                 </div>
             </div>
-            <h1>{group.name}</h1>
-            <div
-                className="description-container"
-                onClick={() => setShowDescription(true)}
-            >
-                <ArticleIcon />
-                <p>descrição</p>
+            <div className="card-body">
+                <p>{group.discipline}</p>
+                <p>{group.date}</p>
+                <p>{group.description}</p>
             </div>
-            <p>{group.date}</p>
-            <p>{group.discipline}</p>
-            <p>
-                {group.tags.map((tag, index) => (
-                    <span key={index}>{tag}</span>
-                ))}
-            </p>
-
-            <p>{group.owner?.name}</p>
-            <p>{group.id}</p>
-            <div className="btn-container">
+            <div className="card-footer">
+            <PrimaryButton
+                    onClick={addMember}
+                    disabled={!(members.length < sizeMax)}
+                    widthP='270px'
+                >
+                    {members.length < sizeMax ? 'Solicitar entrada' : 'Lotado'}
+                </PrimaryButton>   
                 <PrimaryButton
                     onClick={addMember}
                     disabled={!(members.length < sizeMax)}
+                    widthP='270px'
                 >
                     {members.length < sizeMax ? 'Solicitar entrada' : 'Lotado'}
-                </PrimaryButton>
+                </PrimaryButton>                
             </div>
             {showModal && (
                 <MemberModal setShowModal={setShowModal} members={members} />
