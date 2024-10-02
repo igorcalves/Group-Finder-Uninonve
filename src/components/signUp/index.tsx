@@ -9,6 +9,7 @@ interface SignUpProps {
 const SignUp: React.FC<SignUpProps> = ({ setCurrentSate }) => {
     return (
         <div className="sign-up-body">
+            <h1>Cadastro</h1>
             <PrimaryInput
                 placeholder="Digite seu nome"
                 setContent={() => {}}
