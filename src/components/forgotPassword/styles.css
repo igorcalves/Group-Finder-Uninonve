@@ -1,0 +1,11 @@
+.forgot-password-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.forgot-password-btn-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

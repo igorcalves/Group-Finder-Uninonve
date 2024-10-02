@@ -5,24 +5,31 @@ interface InputProps {
     placeholder: string;
     setContent: Dispatch<SetStateAction<string>>;
     widthP?: string;
+    label?: string;
 }
 
 const PrimaryInput: React.FC<InputProps> = ({
     placeholder,
     setContent,
     widthP,
+    label,
 }) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setContent(event.target.value);
     };
 
     return (
-        <input
-            style={{ width: widthP }}
-            type="text"
-            placeholder={placeholder}
-            onChange={handleChange}
-        />
+        <>
+            <div className="label-container">
+                <p>{label}</p>
+                <input
+                    style={{ width: widthP }}
+                    type="text"
+                    placeholder={placeholder}
+                    onChange={handleChange}
+                />
+            </div>
+        </>
     );
 };
 

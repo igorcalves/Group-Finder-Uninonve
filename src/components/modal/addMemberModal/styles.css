@@ -1,8 +1,8 @@
 .add-modal-container {
     display: flex;
     position: absolute;
-    height: 340px;
-    width: 320px;
+    width: 360px;
+    align-items: center;
     background-color: white;
     flex-direction: column;
     gap: 30px;
@@ -29,6 +29,7 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    margin-bottom: 20px;
 }
 
 .close-icon:hover {

@@ -1,11 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './styles.css';
 import PrimaryInput from '../../components/input';
 import PrimaryButton from '../../components/button/primaryButton';
 import sapiens from '../../assets/images/sapiens.png';
 import { useGlobalContext } from '../../context';
+import LoginEnter from '../../components/loginEnter';
+import FortgotPassword from '../../components/forgotPassword';
+import SignUp from '../../components/signUp';
 const Login: React.FC = () => {
     const { setCurrentPage } = useGlobalContext();
+    const [currentSate, setCurrentSate] = useState('login');
+
+    const switchState = () => {
+        switch (currentSate) {
+            case 'forgot-password':
+                return <FortgotPassword setCurrentSate={setCurrentSate} />;
+            case 'signUp':
+                return <SignUp setCurrentSate={setCurrentSate} />;
+            default:
+                return (
+                    <LoginEnter
+                        setCurrentSate={setCurrentSate}
+                        setCurrentPage={setCurrentPage}
+                    />
+                );
+        }
+    };
+
     return (
         <div className="login-container">
             <img
@@ -14,28 +35,8 @@ const Login: React.FC = () => {
                 alt="Sapiens background"
             ></img>
 
-            <div className="container-login">
-                <div className="components-container">
-                    <div className="container-right">
-                        <h1>Entrar</h1>
-                        <PrimaryInput
-                            placeholder="Email"
-                            setContent={() => {}}
-                        />
-                        <PrimaryInput
-                            placeholder="Senha"
-                            setContent={() => {}}
-                        />
-                        <div className="btn-container ">
-                            <PrimaryButton
-                                widthP="290px"
-                                onClick={() => setCurrentPage('home')}
-                            >
-                                Entrar
-                            </PrimaryButton>
-                        </div>
-                    </div>
-                </div>
+            <div className="container-right">
+                <div className="components-container">{switchState()}</div>
             </div>
         </div>
     );

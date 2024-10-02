@@ -14,7 +14,7 @@
 .modal-container {
     display: flex;
     background-color: white;
-    height: 250px;
+    height: 300px;
     width: 350px;
     justify-content: flex-start;
     align-items: center;

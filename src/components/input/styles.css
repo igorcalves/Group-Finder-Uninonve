@@ -1,15 +1,30 @@
 input {
-    padding: 10px;
+    padding: 13px;
     height: 20px;
     width: 270px;
-    border: 2.5px solid;
-    border-radius: 7px;
+    border: 1px solid #00000062;
+    border-radius: 10px;
+    background-color: rgba(151, 150, 150, 0.103);
+    font-family: 'Roboto', sans-serif;
+}
+input::placeholder {
+    color: gray;
+    font-size: 13px;
+    font-family: 'Roboto', sans-serif;
 }
 input:focus {
-    border: 2.5px solid #01b3ff;
+    border: 1.4px solid #01b3ff;
     outline: none;
 }
 
-input:hover {
-    border: 2.5px solid #01b3ff;
+.label-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.label-container p {
+    margin-bottom: 10px;
+    font-family: 'Roboto', sans-serif;
+    color: gray;
 }
