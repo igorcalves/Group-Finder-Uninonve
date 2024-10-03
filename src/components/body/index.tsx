@@ -46,7 +46,7 @@ const Body: React.FC = () => {
                         <CardGroup key={group.id} group={group} />
                     ))
                 ) : (
-                    <h1>Não existe nenhum grupo registrado...</h1>
+                    <h1>Não existe nenhum grupo registrado... </h1>
                 )}
             </div>
         </div>
