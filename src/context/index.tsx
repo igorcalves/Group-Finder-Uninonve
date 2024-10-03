@@ -17,7 +17,7 @@ const GlobalContext = createContext<GlobalContextProps | undefined>(undefined);
 export const GlobalProvider: React.FC<{ children: ReactNode }> = ({
     children,
 }) => {
-    const [currentPage, setCurrentPage] = useState('login');
+    const [currentPage, setCurrentPage] = useState('home');
     const [groups, setGroups] = useState<Group[]>([]);
     const [user, setUser] = useState<User | undefined>(undefined);
 
