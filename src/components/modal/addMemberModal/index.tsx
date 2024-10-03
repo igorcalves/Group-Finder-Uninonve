@@ -4,21 +4,25 @@ import PrimaryInput from '../../input';
 import PrimaryButton from '../../button/primaryButton';
 import Close from '@mui/icons-material/Close';
 import { User } from '../../../domain/user';
+import { useGlobalContext } from '../../../context';
 
 interface AddMemberModalProps {
     setShowModal: (show: boolean) => void;
     members: User[];
     setMembers: Dispatch<SetStateAction<User[]>>;
+    groupId: string;
 }
 
 const AddMemberModal: React.FC<AddMemberModalProps> = ({
     setShowModal,
     members,
     setMembers,
+    groupId,
 }) => {
     const [name, setName] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [phone, setPhone] = React.useState('');
+    const { groups, setGroups } = useGlobalContext();
 
     const addNewMember = () => {
         const user: User = {
@@ -27,7 +31,14 @@ const AddMemberModal: React.FC<AddMemberModalProps> = ({
             phone,
         };
 
-        setMembers([...members, user]);
+        const updatedMembers = [...members, user];
+        setMembers(updatedMembers);
+
+        const updatedGroups = groups.map((g) =>
+            g.id === groupId ? { ...g, members: updatedMembers } : g
+        );
+
+        setGroups(updatedGroups);
         setShowModal(false);
     };
 

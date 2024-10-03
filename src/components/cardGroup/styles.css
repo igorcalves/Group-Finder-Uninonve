@@ -7,7 +7,6 @@
     width: 300px;
     height: 340px;
     overflow: hidden;
-    margin-bottom: 30px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
     color: black;
 }
@@ -22,9 +21,29 @@
     align-items: center;
     flex: 0.5;
     color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .card-header {
     font-size: 14px;
+}
+
+.groups-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: space-between;
+}
+
+.card-header h1 {
+    font-size: 20px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 10px;
+    color: white;
 }
 
 .card-header p {

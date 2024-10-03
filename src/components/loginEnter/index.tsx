@@ -37,7 +37,8 @@ const LoginEnter: React.FC<LoginEnterProps> = ({
                 <PrimaryButton
                     widthP="315px"
                     onClick={() =>
-                        login(email, password, () => setCurrentPage('home'))
+                        // login(email, password, () => setCurrentPage('home'))
+                        localStorage.setItem('loggedIn', 'true')
                     }
                 >
                     Entrar

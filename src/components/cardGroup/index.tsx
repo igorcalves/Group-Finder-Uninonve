@@ -3,15 +3,14 @@ import { Group } from '../../domain/group';
 import { User } from '../../domain/user';
 import './styles.css';
 import PrimaryButton from '../button/primaryButton';
-import PersonIcon from '@mui/icons-material/Person';
 import MemberModal from '../modal/memberModal';
 import AddMemberModal from '../modal/addMemberModal';
-import ArticleIcon from '@mui/icons-material/Article';
-import { Groups, Maximize } from '@mui/icons-material';
+import { Groups } from '@mui/icons-material';
 import TextModal from '../modal/textModal';
 
 interface CardGroupProps {
     group: Group;
+    onUpdateGroup: (group: Group) => void;
 }
 
 export function CardGroup({ group }: CardGroupProps) {
@@ -35,7 +34,7 @@ export function CardGroup({ group }: CardGroupProps) {
     return (
         <div className="card-container">
             <div className="card-header">
-                <h1>{group.name}</h1>
+                <h1 title={group.name}>{group.name}</h1>
                 <div className="group-container">
                     <Groups />
                     <p>
@@ -79,6 +78,7 @@ export function CardGroup({ group }: CardGroupProps) {
                     setShowModal={setShowAddMemberModal}
                     members={members}
                     setMembers={setMembers}
+                    groupId={group.id}
                 />
             )}
             {showDescription && (

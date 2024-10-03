@@ -5,16 +5,26 @@ import './styles.css';
 import CreateGroupModal from '../modal/createGroupModal';
 import { useGlobalContext } from '../../context';
 import { User } from '../../domain/user';
+import RedirectModal from '../modal/redirectModal';
 
 const CreateGroup: React.FC = () => {
     const { setGroups } = useGlobalContext();
     const [name, setName] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [showModal, setShowModal] = useState<boolean>(false);
-
+    const [redirectModal, setRedirectModal] = useState<boolean>(false);
+    const loggedIn = localStorage.getItem('loggedIn');
     function clearField() {
         setName('');
         setDescription('');
+    }
+
+    function handlePostGroup() {
+        if (loggedIn) {
+            setShowModal(true);
+        } else {
+            setRedirectModal(true);
+        }
     }
 
     function createGroup() {
@@ -55,10 +65,7 @@ const CreateGroup: React.FC = () => {
 
     return (
         <>
-            <PostAdd
-                className="icon-add-group"
-                onClick={() => setShowModal(true)}
-            />
+            <PostAdd className="icon-add-group" onClick={handlePostGroup} />
             <CreateGroupModal
                 isVisible={showModal}
                 setName={setName}
@@ -68,6 +75,12 @@ const CreateGroup: React.FC = () => {
                 handleButton={createGroup}
                 handleCloseModal={() => setShowModal(false)}
             />
+            {redirectModal && (
+                <RedirectModal
+                    isVisible={redirectModal}
+                    handleCloseModal={setRedirectModal}
+                />
+            )}
         </>
     );
 };

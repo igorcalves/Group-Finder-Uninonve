@@ -9,6 +9,7 @@ import logo from '../../assets/images/logo2.png';
 const Header: React.FC = () => {
     const [headerTitle, setHeaderTitle] = useState('');
     const { setCurrentPage } = useGlobalContext();
+    const loggedIn = localStorage.getItem('loggedIn');
     return (
         <div className="header">
             <div className="header-section left">
@@ -26,10 +27,15 @@ const Header: React.FC = () => {
                     content={DISCIPLINES}
                     IconComponent={MenuBook}
                 />
-                <Logout
-                    onClick={() => setCurrentPage('login')}
-                    className="icon-logout"
-                />
+                {loggedIn && (
+                    <Logout
+                        onClick={() => {
+                            setCurrentPage('login');
+                            localStorage.removeItem('loggedIn');
+                        }}
+                        className="icon-logout"
+                    />
+                )}
             </div>
         </div>
     );
