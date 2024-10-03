@@ -31,5 +31,4 @@ jobs:
                   REACT_APP_FIREBASE_APP_ID: ${{ secrets.REACT_APP_FIREBASE_APP_ID }}
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
-                  CI=false npm run build
                   npm run deploy
