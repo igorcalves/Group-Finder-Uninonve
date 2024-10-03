@@ -37,6 +37,6 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
 
               run: |
-                  git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@https://github.com/igorcalves/Group-Finder-Uninonve.git
+                  git remote set-url origin https://x-access-token:${{ secrets.DEPLOY_TOKEN }}@https://github.com/igorcalves/Group-Finder-Uninonve.git
                   CI=false npm run build
                   npm run deploy
