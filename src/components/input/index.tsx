@@ -20,10 +20,11 @@ const PrimaryInput: React.FC<InputProps> = ({
 
     return (
         <>
-            <div className="label-container">
+            <div className="label-container" style={{ width: widthP }}>
                 <p>{label}</p>
                 <input
-                    style={{ width: widthP }}
+                    className="custom-input"
+                    style={{ width: '100%' }} // Ajusta o input para ocupar 100% do container
                     type="text"
                     placeholder={placeholder}
                     onChange={handleChange}

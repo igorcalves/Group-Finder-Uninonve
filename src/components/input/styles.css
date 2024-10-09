@@ -1,18 +1,15 @@
-input {
-    padding: 13px;
-    height: 20px;
-    width: 270px;
+.custom-input {
     border: 1px solid #00000062;
     border-radius: 10px;
     background-color: rgba(151, 150, 150, 0.103);
     font-family: 'Roboto', sans-serif;
 }
-input::placeholder {
+.custom-input::placeholder {
     color: gray;
     font-size: 13px;
     font-family: 'Roboto', sans-serif;
 }
-input:focus {
+.custom-input:focus {
     border: 1.4px solid #01b3ff;
     outline: none;
 }
@@ -27,4 +24,20 @@ input:focus {
     margin-bottom: 10px;
     font-family: 'Roboto', sans-serif;
     color: gray;
+}
+
+.label-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.custom-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px;
+    width: 100%;
+    border: 1px solid #00000062;
+    border-radius: 10px;
 }
