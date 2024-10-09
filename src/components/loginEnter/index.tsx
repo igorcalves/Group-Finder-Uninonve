@@ -16,7 +16,6 @@ const LoginEnter: React.FC<LoginEnterProps> = ({
     const [password, setPassword] = React.useState('');
     const handleLongin = () => {
         login(email, password, () => setCurrentPage('home'));
-        localStorage.setItem('loggedIn', 'true');
     };
     return (
         <>

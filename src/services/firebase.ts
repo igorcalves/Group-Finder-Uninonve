@@ -50,6 +50,7 @@ export const login = async (
         console.log('User logged in:', userCredential.user);
         if (userCredential.user) {
             setCurrentPage();
+            localStorage.setItem('loggedIn', 'true');
         }
     } catch (error) {
         console.error('Error logging in:', error);
