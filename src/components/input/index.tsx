@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react';
+import classNames from 'classnames';
 import './styles.css';
 
 interface InputProps {
@@ -6,6 +7,8 @@ interface InputProps {
     setContent: Dispatch<SetStateAction<string>>;
     widthP?: string;
     label?: string;
+    hasError?: boolean;
+    onBlur?: () => void;
 }
 
 const PrimaryInput: React.FC<InputProps> = ({
@@ -13,6 +16,8 @@ const PrimaryInput: React.FC<InputProps> = ({
     setContent,
     widthP,
     label,
+    hasError,
+    onBlur,
 }) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setContent(event.target.value);
@@ -23,12 +28,22 @@ const PrimaryInput: React.FC<InputProps> = ({
             <div className="label-container" style={{ width: widthP }}>
                 <p>{label}</p>
                 <input
-                    className="custom-input"
-                    style={{ width: '100%' }} // Ajusta o input para ocupar 100% do container
+                    className={classNames('custom-input', { error: hasError })}
                     type="text"
                     placeholder={placeholder}
                     onChange={handleChange}
+                    onBlur={onBlur}
                 />
+                <p
+                    className={classNames('error-message', {
+                        visible: hasError,
+                    })}
+                    style={{
+                        color: hasError ? 'red' : 'transparent',
+                    }}
+                >
+                    {hasError ? 'Campo inválido *' : ''}
+                </p>
             </div>
         </>
     );

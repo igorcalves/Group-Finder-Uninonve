@@ -25,10 +25,14 @@ export const register = async (email: string, password: string) => {
     }
 };
 
-export const resetPassword = async (email: string) => {
+export const resetPassword = async (
+    email: string,
+    setCurrentState: (state: string) => void
+) => {
     try {
         await sendPasswordResetEmail(auth, email);
         console.log('Password reset email sent');
+        setCurrentState('login-enter');
         return true;
     } catch (error) {
         console.error('Error sending password reset email:', error);
@@ -78,7 +82,7 @@ export const createAccount = async (
                 phone: registerObject.phone,
                 keyword: registerObject.keyword,
             });
-            console.log('User document created in Firestore');
+            setCurrentState('login-enter');
         } catch (error) {
             console.error('Error creating user document:', error);
         }

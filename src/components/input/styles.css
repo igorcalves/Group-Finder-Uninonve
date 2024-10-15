@@ -41,3 +41,14 @@
     border: 1px solid #00000062;
     border-radius: 10px;
 }
+
+.custom-input.error {
+    border-color: red; 
+    background-color: #ffe6e6;
+}
+
+.error-message{
+    font-size: 14px;
+    margin-top: 4px;
+    margin-left: 4px;
+}

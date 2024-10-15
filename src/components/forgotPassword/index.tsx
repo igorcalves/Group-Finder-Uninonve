@@ -3,6 +3,7 @@ import PrimaryInput from '../input';
 import PrimaryButton from '../button/primaryButton';
 import './styles.css';
 import { resetPassword } from '../../services/firebase';
+import { isValidEmail } from '../../utils/inputValidator';
 
 interface FortgotPasswordProps {
     setCurrentSate: (state: string) => void;
@@ -13,7 +14,7 @@ const FortgotPassword: React.FC<FortgotPasswordProps> = ({
 }) => {
     const [email, setEmail] = useState('');
     function handleResetPassword() {
-        resetPassword(email);
+        resetPassword(email, () => setCurrentSate('login-enter'));
     }
 
     return (
@@ -22,6 +23,7 @@ const FortgotPassword: React.FC<FortgotPasswordProps> = ({
             <PrimaryInput
                 placeholder="Email"
                 setContent={setEmail}
+                hasError={!isValidEmail(email)}
                 label="Email"
             />
             <div className="forgot-password-btn-container">
@@ -36,6 +38,7 @@ const FortgotPassword: React.FC<FortgotPasswordProps> = ({
                 <PrimaryButton
                     widthP="295px"
                     onClick={handleResetPassword}
+                    disabled={!isValidEmail(email) || email === ''}
                 >
                     Enviar
                 </PrimaryButton>

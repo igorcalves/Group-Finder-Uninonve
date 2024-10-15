@@ -54,3 +54,8 @@
     font-size: 13px;
     cursor: pointer;
 }
+
+.password-input.error {
+    border-color: red;
+    background-color: #ffe6e6;
+}

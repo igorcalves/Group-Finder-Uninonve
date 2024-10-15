@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './styles.css';
-import PrimaryInput from '../../components/input';
-import PrimaryButton from '../../components/button/primaryButton';
+
 import sapiens from '../../assets/images/sapiens.png';
 import { useGlobalContext } from '../../context';
 import LoginEnter from '../../components/loginEnter';
