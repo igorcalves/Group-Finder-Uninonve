@@ -7,6 +7,7 @@ import {
 } from 'firebase/auth';
 import { Register } from '../domain/register';
 import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
+import { toast } from 'react-toastify';
 
 const auth = getAuth(appConfig);
 
@@ -43,7 +44,8 @@ export const resetPassword = async (
 export const login = async (
     email: string,
     password: string,
-    setCurrentPage: () => void
+    setCurrentPage: () => void,
+    setLoading: (loading: boolean) => void
 ) => {
     try {
         const userCredential = await signInWithEmailAndPassword(
@@ -55,9 +57,11 @@ export const login = async (
         if (userCredential.user) {
             setCurrentPage();
             localStorage.setItem('loggedIn', 'true');
+            setLoading(false);
         }
     } catch (error) {
-        console.error('Error logging in:', error);
+        toast.error('Email ou senha inválidos');
+        setLoading(false);
         return error;
     }
 };
@@ -68,7 +72,8 @@ const sanitizeEmail = (email: string) => {
 
 export const createAccount = async (
     registerObject: Register,
-    setCurrentState: (state: string) => void
+    setCurrentState: (state: string) => void,
+    setLoading: (loading: boolean) => void
 ) => {
     const user: any = await register(
         registerObject.email,
@@ -83,8 +88,11 @@ export const createAccount = async (
                 keyword: registerObject.keyword,
             });
             setCurrentState('login-enter');
-        } catch (error) {
-            console.error('Error creating user document:', error);
+            toast.success('Conta criada com sucesso');
+            setLoading(false);
+        } catch (error: any) {
+            toast.error('O email já está em uso');
+            setLoading(false);
         }
     }
 };

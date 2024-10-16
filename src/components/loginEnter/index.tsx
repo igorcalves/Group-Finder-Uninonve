@@ -4,6 +4,8 @@ import React from 'react';
 import { login } from '../../services/firebase';
 import PasswordInput from '../input/passwordInput.tsx';
 import { isValidEmail, isValidPassword } from '../../utils/inputValidator';
+import { BeatLoader } from 'react-spinners';
+
 interface LoginEnterProps {
     setCurrentPage: (page: string) => void;
     setCurrentSate: (state: string) => void;
@@ -15,8 +17,10 @@ const LoginEnter: React.FC<LoginEnterProps> = ({
 }) => {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const [loading, setLoading] = React.useState(false);
     const handleLongin = () => {
-        login(email, password, () => setCurrentPage('home'));
+        setLoading(true);
+        login(email, password, () => setCurrentPage('home'), setLoading);
     };
 
     return (
@@ -50,7 +54,7 @@ const LoginEnter: React.FC<LoginEnterProps> = ({
                         !isValidPassword(password)
                     }
                 >
-                    Entrar
+                    {loading ? <BeatLoader color="#fff" size={6} /> : 'Entrar'}
                 </PrimaryButton>
                 <div className="forgot-count-container">
                     <p>

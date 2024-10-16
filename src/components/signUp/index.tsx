@@ -4,8 +4,10 @@ import './styles.css';
 import PrimaryButton from '../button/primaryButton';
 import PasswordInput from '../input/passwordInput.tsx';
 import { Register } from '../../domain/register';
-import { Timestamp } from 'firebase/firestore';
 import { createAccount } from '../../services/firebase';
+import { toast } from 'react-toastify';
+import { isValidEmail, isValidPassword } from '../../utils/inputValidator';
+import { BeatLoader } from 'react-spinners';
 
 interface SignUpProps {
     setCurrentSate: (state: string) => void;
@@ -18,8 +20,10 @@ const SignUp: React.FC<SignUpProps> = ({ setCurrentSate }) => {
     const [keyword, setKeyword] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
+    const [loading, setLoading] = useState(false);
 
     function handleSummit() {
+        setLoading(true);
         if (password === passwordConfirm) {
             createAccount(
                 {
@@ -29,10 +33,11 @@ const SignUp: React.FC<SignUpProps> = ({ setCurrentSate }) => {
                     keyword,
                     password,
                 } as Register,
-                () => setCurrentSate('login-enter')
+                () => setCurrentSate('login-enter'),
+                setLoading
             );
         } else {
-            alert('As senhas não coincidem');
+            toast.error('As senhas não são iguais');
         }
     }
 
@@ -47,6 +52,7 @@ const SignUp: React.FC<SignUpProps> = ({ setCurrentSate }) => {
             <PrimaryInput
                 placeholder="Digite seu email"
                 setContent={setEmail}
+                hasError={!isValidEmail(email)}
                 label="Email"
             />
             <PrimaryInput
@@ -62,12 +68,21 @@ const SignUp: React.FC<SignUpProps> = ({ setCurrentSate }) => {
             <PasswordInput
                 placeholder="Digite sua senha"
                 setContent={setPassword}
+                hasError={!isValidPassword(password)}
                 label="Senha"
             />
             <PasswordInput
                 placeholder="Confirme sua senha"
                 setContent={setPasswordConfirm}
                 label="Confirme a Senha"
+                hasError={
+                    password !== passwordConfirm || !isValidPassword(password)
+                }
+                errorMessage={
+                    password !== passwordConfirm
+                        ? 'As senhas não são iguais'
+                        : 'Campo inválido: a senha deverá ter pelo menos 6 caracteres'
+                }
             />
             <PrimaryButton
                 widthP="290px"
@@ -75,8 +90,22 @@ const SignUp: React.FC<SignUpProps> = ({ setCurrentSate }) => {
             >
                 Cancelar
             </PrimaryButton>
-            <PrimaryButton widthP="290px" onClick={handleSummit}>
-                Cadastrar
+            <PrimaryButton
+                widthP="290px"
+                onClick={handleSummit}
+                disabled={
+                    name === '' ||
+                    email === '' ||
+                    phone === '' ||
+                    keyword === '' ||
+                    password === '' ||
+                    passwordConfirm === '' ||
+                    !isValidEmail(email) ||
+                    !isValidPassword(password) ||
+                    password !== passwordConfirm
+                }
+            >
+                {loading ? <BeatLoader color="#fff" size={6} /> : 'Cadastrar'}
             </PrimaryButton>
         </div>
     );

@@ -9,7 +9,8 @@ interface PasswordInputProps {
     setContent: React.Dispatch<React.SetStateAction<string>>;
     widthP?: string;
     label?: string;
-    hasError?: boolean; // Adicione a prop hasError
+    hasError?: boolean;
+    errorMessage?: string;
 }
 
 const PasswordInput: React.FC<PasswordInputProps> = ({
@@ -18,6 +19,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
     widthP,
     label,
     hasError,
+    errorMessage = '',
 }) => {
     const [showPassword, setShowPassword] = useState(false);
 
@@ -55,11 +57,12 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
                 className={classNames('error-message', { visible: hasError })}
                 style={{
                     color: hasError ? 'red' : 'transparent',
+                    display: hasError ? 'block' : 'none',
                 }}
             >
-                {hasError
-                    ? 'Campo inválido: a senha deverá ter pelo menos 6 caracteres'
-                    : ''}
+                {errorMessage !== ''
+                    ? errorMessage
+                    : 'Campo inválido: a senha deverá ter pelo menos 6 caracteres'}
             </p>
         </div>
     );
