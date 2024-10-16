@@ -49,6 +49,6 @@ After completing these steps, you'll be ready to run your project!
  npm run start
 ``` 
 
-#### Contact
+## Contact
 
 Email: igor193@live.com
