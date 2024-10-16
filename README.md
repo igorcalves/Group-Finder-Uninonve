@@ -1,6 +1,11 @@
 <div style="text-align: center;">
 <h1>Group Finder</h1>
+
+<p
+style ="color: gray"
+>
 An easy solution for finding your ideal university group.
+</p>
 </div>
 
 ## About the project 
@@ -29,22 +34,21 @@ this project use npm as package manager
 ```bash
  npm i
 ``` 
+
+
+
+### Firebase
+By default, Firebase requires six environment variables to function properly. You can obtain these by using the Firebase configuration, following the documentation. For information on archiving your configuration, you can refer to the Firebase documentation here.
+
+You will need to set up two projects: one for Firestore and another for email and password authentication. Please follow the Google documentation to do this.
+
+After completing these steps, you'll be ready to run your project!
 #### :rocket: Run
 
 ```bash
  npm run start
 ``` 
 
+#### Contact
 
-
- (light bulb) - :bulb:
-📄 (page facing up) - :page_facing_up:
-📈 (chart increasing) - :chart_with_upwards_trend:
-📝 (memo) - :memo:
-🔒 (lock) - :lock:
-🌐 (globe) - :globe_with_meridians:
-🚀 (rocket) - :rocket:
-💻 (laptop) - :laptop:
-🎉 (party popper) - :tada:
-🛡️ (shield) - :shield:
-
+Email: igor193@live.com
