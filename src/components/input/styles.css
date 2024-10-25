@@ -43,11 +43,11 @@
 }
 
 .custom-input.error {
-    border-color: red; 
+    border-color: red;
     background-color: #ffe6e6;
 }
 
-.error-message{
+.error-message {
     font-size: 14px;
     margin-top: 4px;
     margin-left: 4px;

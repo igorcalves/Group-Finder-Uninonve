@@ -14,7 +14,6 @@
 .modal-container {
     display: flex;
     background-color: white;
-    height: 300px;
     width: 350px;
     justify-content: flex-start;
     align-items: center;
@@ -30,4 +29,17 @@
     border-top-right-radius: 7px;
     padding: 20px;
     box-sizing: border-box;
+}
+
+.checkbox-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
 }

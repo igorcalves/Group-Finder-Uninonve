@@ -9,4 +9,6 @@ export interface Group {
     tags: string[];
     owner: User | undefined;
     id: string;
+    maxMembers: number;
+    closedGroup: boolean;
 }

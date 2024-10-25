@@ -30,7 +30,6 @@ export function CardGroup({ group }: CardGroupProps) {
         }
         return description;
     }
-
     return (
         <div className="card-container">
             <div className="card-header">
@@ -38,7 +37,7 @@ export function CardGroup({ group }: CardGroupProps) {
                 <div className="group-container">
                     <Groups />
                     <p>
-                        {members.length}/{sizeMax}
+                        {members.length}/{group.maxMembers}
                     </p>
                 </div>
             </div>
@@ -62,11 +61,15 @@ export function CardGroup({ group }: CardGroupProps) {
                 </PrimaryButton>
                 <PrimaryButton
                     onClick={addMember}
-                    disabled={!(members.length < sizeMax)}
+                    disabled={!(members.length < sizeMax) || group.closedGroup}
                     widthP="270px"
                     colorP="#006d9b"
                 >
-                    {members.length < sizeMax ? 'Solicitar entrada' : 'Lotado'}
+                    {group.closedGroup
+                        ? ' Grupo fechado'
+                        : members.length < sizeMax
+                        ? 'Solicitar entrada'
+                        : 'Lotado'}
                 </PrimaryButton>
             </div>
             {showModal && (

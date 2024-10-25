@@ -54,18 +54,15 @@ const AddMemberModal: React.FC<AddMemberModalProps> = ({
                 </div>
                 <div className="modal-body">
                     <PrimaryInput
-                        label="Nome"
                         placeholder="Digite seu nome"
                         setContent={setName}
                     />
 
                     <PrimaryInput
-                        label="Email"
                         placeholder="Digite seu email"
                         setContent={setEmail}
                     />
                     <PrimaryInput
-                        label="Telefone"
                         placeholder="Digite seu telefone"
                         setContent={setPhone}
                     />

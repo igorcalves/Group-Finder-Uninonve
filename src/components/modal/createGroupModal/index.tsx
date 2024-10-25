@@ -3,14 +3,19 @@ import './styles.css';
 import PrimaryInput from '../../input';
 import PrimaryButton from '../../button/primaryButton';
 import CloseBtn from '@mui/icons-material/Close';
+import { Checkbox } from '@mui/material';
 interface CreateGroupModalProps {
     isVisible: boolean;
     setName: Dispatch<SetStateAction<string>>;
     name: string;
     description: string;
+    quantityMembers: string;
     setDescription: Dispatch<SetStateAction<string>>;
     handleButton: () => void;
     handleCloseModal: () => void;
+    setQuantityMembers: Dispatch<SetStateAction<string>>;
+    closedGroup: boolean;
+    setClosedGroup: Dispatch<SetStateAction<boolean>>;
 }
 
 const CreateGroupModal: React.FC<CreateGroupModalProps> = ({
@@ -21,8 +26,17 @@ const CreateGroupModal: React.FC<CreateGroupModalProps> = ({
     name,
     description,
     handleCloseModal,
+    setQuantityMembers,
+    quantityMembers,
+    closedGroup,
+    setClosedGroup,
 }) => {
+    const handleCheckboxChange = () => {
+        setClosedGroup(!closedGroup);
+    };
+
     if (!isVisible) return null;
+
     return (
         <div className="background-container">
             <div className="modal-container">
@@ -42,10 +56,30 @@ const CreateGroupModal: React.FC<CreateGroupModalProps> = ({
                         placeholder="Descrição do grupo"
                         setContent={setDescription}
                     />
+                    <PrimaryInput
+                        placeholder="Quantidade de membros"
+                        setContent={setQuantityMembers}
+                        type="number"
+                        maxLength={3}
+                    />
+
+                    <div className="checkbox-container">
+                        <div className="checkbox-item">
+                            <Checkbox
+                                checked={closedGroup}
+                                onChange={handleCheckboxChange}
+                            />
+                            <p>Entrada Somente com convite</p>
+                        </div>
+                    </div>
 
                     <PrimaryButton
                         onClick={handleButton}
-                        disabled={name === '' || description === ''}
+                        disabled={
+                            name === '' ||
+                            description === '' ||
+                            quantityMembers === ''
+                        }
                         widthP="290px"
                         colorP="#006d9b"
                     >

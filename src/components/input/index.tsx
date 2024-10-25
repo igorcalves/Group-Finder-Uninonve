@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import classNames from 'classnames';
 import './styles.css';
+import { maskToQuantityNumber } from '../../utils/inputValidator';
 
 interface InputProps {
     placeholder: string;
@@ -9,6 +10,8 @@ interface InputProps {
     label?: string;
     hasError?: boolean;
     onBlur?: () => void;
+    type?: string;
+    maxLength?: number;
 }
 
 const PrimaryInput: React.FC<InputProps> = ({
@@ -18,8 +21,13 @@ const PrimaryInput: React.FC<InputProps> = ({
     label,
     hasError,
     onBlur,
+    type,
+    maxLength,
 }) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (type === 'number') {
+            maskToQuantityNumber(event);
+        }
         setContent(event.target.value);
     };
 
@@ -29,10 +37,11 @@ const PrimaryInput: React.FC<InputProps> = ({
                 <p>{label}</p>
                 <input
                     className={classNames('custom-input', { error: hasError })}
-                    type="text"
+                    type={type || 'text'}
                     placeholder={placeholder}
                     onChange={handleChange}
                     onBlur={onBlur}
+                    maxLength={maxLength}
                 />
                 <p
                     className={classNames('error-message', {
