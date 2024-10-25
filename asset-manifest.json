@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Group-Finder-Uninonve/static/css/main.23070ff6.css",
-    "main.js": "/Group-Finder-Uninonve/static/js/main.8e8761bf.js",
+    "main.css": "/Group-Finder-Uninonve/static/css/main.32cb0555.css",
+    "main.js": "/Group-Finder-Uninonve/static/js/main.97b15c98.js",
     "static/media/sapiens.png": "/Group-Finder-Uninonve/static/media/sapiens.be6b8c3c6eb08471a25e.png",
     "static/media/logo2.png": "/Group-Finder-Uninonve/static/media/logo2.0fef8a2b09955e190586.png",
     "index.html": "/Group-Finder-Uninonve/index.html",
-    "main.23070ff6.css.map": "/Group-Finder-Uninonve/static/css/main.23070ff6.css.map",
-    "main.8e8761bf.js.map": "/Group-Finder-Uninonve/static/js/main.8e8761bf.js.map"
+    "main.32cb0555.css.map": "/Group-Finder-Uninonve/static/css/main.32cb0555.css.map",
+    "main.97b15c98.js.map": "/Group-Finder-Uninonve/static/js/main.97b15c98.js.map"
   },
   "entrypoints": [
-    "static/css/main.23070ff6.css",
-    "static/js/main.8e8761bf.js"
+    "static/css/main.32cb0555.css",
+    "static/js/main.97b15c98.js"
   ]
 }
