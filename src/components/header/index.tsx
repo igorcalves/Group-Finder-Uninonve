@@ -6,6 +6,7 @@ import DropDownMenu from '../dropdownMenu/DropDownMenu';
 import CreateGroup from '../createGroup';
 import { useGlobalContext } from '../../context';
 import logo from '../../assets/images/logo2.png';
+import { logout } from '../../services/firebase';
 const Header: React.FC = () => {
     const [headerTitle, setHeaderTitle] = useState('');
     const { setCurrentPage } = useGlobalContext();
@@ -30,8 +31,7 @@ const Header: React.FC = () => {
                 {loggedIn && (
                     <Logout
                         onClick={() => {
-                            setCurrentPage('login');
-                            localStorage.removeItem('loggedIn');
+                            logout(() => setCurrentPage('login'));
                         }}
                         className="icon-logout"
                     />

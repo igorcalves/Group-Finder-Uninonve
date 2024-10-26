@@ -1,16 +1,20 @@
 .card-user {
     display: flex;
     flex-direction: column;
-    width: 300px;
     border-radius: 9px;
     padding: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     gap: 5px;
     background-color: #006d9b;
     margin-bottom: 10px;
+    cursor: pointer;
+}
+.card-user:hover {
+    opacity: 0.8;
 }
 
 .card-user p {
+    color: white;
     display: block;
     margin: 0;
     padding: 0;

@@ -4,12 +4,16 @@ import './styles.css';
 import PrimaryInput from '../input';
 import { useGlobalContext } from '../../context';
 import { Pagination } from '@mui/material';
+import { getGroups, getUser } from '../../services/firebase';
+import { User } from '../../domain/user';
+import UserDashboard from '../userDashboard';
 
 const Body: React.FC = () => {
     const { groups, setGroups } = useGlobalContext();
     const [search, setSearch] = useState('');
     const [filteredGroups, setFilteredGroups] = useState(groups);
     const [page, setPage] = useState(1);
+    const [user, setUser] = useState<User | undefined>(undefined);
     const groupsPerPage = 10;
 
     const searchForGroups = (search: string) => {
@@ -17,6 +21,16 @@ const Body: React.FC = () => {
             return group.name.toLowerCase().includes(search.toLowerCase());
         });
     };
+
+    useEffect(() => {
+        getGroups().then((groups) => {
+            setGroups(groups);
+        });
+        getUser().then((user) => {
+            setUser(user);
+            console.log(user);
+        });
+    }, []);
 
     useEffect(() => {
         setFilteredGroups(handleSearch(search));
@@ -51,31 +65,39 @@ const Body: React.FC = () => {
 
     return (
         <div className="body">
-            <div className="input-container">
-                <PrimaryInput
-                    setContent={setSearch}
-                    placeholder="Buscar Grupos"
-                    widthP="800px"
-                />
-            </div>
-            <div className="groups-cards-container">
-                <div className="groups-cards">
-                    {paginatedGroups.map((filteredGroup) => (
-                        <CardGroup
-                            key={filteredGroup.id}
-                            group={filteredGroup}
-                            onUpdateGroup={handleUpdateGroup}
+            {localStorage.getItem('loggedIn') ? (
+                <UserDashboard user={user} />
+            ) : (
+                <>
+                    <div className="input-container">
+                        <PrimaryInput
+                            setContent={setSearch}
+                            placeholder="Buscar Grupos"
+                            widthP="800px"
                         />
-                    ))}
-                </div>
-            </div>
-            <div className="pagination-container">
-                <Pagination
-                    count={Math.ceil(filteredGroups.length / groupsPerPage)}
-                    page={page}
-                    onChange={handleChangePage}
-                />
-            </div>
+                    </div>
+                    <div className="groups-cards-container">
+                        <div className="groups-cards">
+                            {paginatedGroups.map((filteredGroup) => (
+                                <CardGroup
+                                    key={filteredGroup.id}
+                                    group={filteredGroup}
+                                    onUpdateGroup={handleUpdateGroup}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                    <div className="pagination-container">
+                        <Pagination
+                            count={Math.ceil(
+                                filteredGroups.length / groupsPerPage
+                            )}
+                            page={page}
+                            onChange={handleChangePage}
+                        />
+                    </div>
+                </>
+            )}
         </div>
     );
 };

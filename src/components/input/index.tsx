@@ -7,11 +7,13 @@ interface InputProps {
     placeholder: string;
     setContent: Dispatch<SetStateAction<string>>;
     widthP?: string;
+    heightP?: string;
     label?: string;
     hasError?: boolean;
     onBlur?: () => void;
     type?: string;
     maxLength?: number;
+    content?: string;
 }
 
 const PrimaryInput: React.FC<InputProps> = ({
@@ -23,6 +25,8 @@ const PrimaryInput: React.FC<InputProps> = ({
     onBlur,
     type,
     maxLength,
+    content,
+    heightP,
 }) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (type === 'number') {
@@ -33,7 +37,10 @@ const PrimaryInput: React.FC<InputProps> = ({
 
     return (
         <>
-            <div className="label-container" style={{ width: widthP }}>
+            <div
+                className="label-container"
+                style={{ width: widthP, height: heightP }}
+            >
                 <p>{label}</p>
                 <input
                     className={classNames('custom-input', { error: hasError })}
@@ -41,8 +48,10 @@ const PrimaryInput: React.FC<InputProps> = ({
                     placeholder={placeholder}
                     onChange={handleChange}
                     onBlur={onBlur}
+                    value={content}
                     maxLength={maxLength}
                 />
+
                 <p
                     className={classNames('error-message', {
                         visible: hasError,

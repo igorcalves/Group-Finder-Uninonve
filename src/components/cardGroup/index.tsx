@@ -51,19 +51,20 @@ export function CardGroup({ group }: CardGroupProps) {
                 </p>
             </div>
             <div className="card-footer">
-                <PrimaryButton
+                {/* <PrimaryButton
                     onClick={() => setShowModal(true)}
                     disabled={members.length <= 0}
                     widthP="270px"
                     colorP="#01b3ff"
                 >
                     Ver membros
-                </PrimaryButton>
+                </PrimaryButton> */}
                 <PrimaryButton
                     onClick={addMember}
                     disabled={!(members.length < sizeMax) || group.closedGroup}
                     widthP="270px"
                     colorP="#006d9b"
+                    colorText="#fff"
                 >
                     {group.closedGroup
                         ? ' Grupo fechado'

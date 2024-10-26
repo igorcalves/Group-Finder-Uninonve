@@ -7,6 +7,7 @@ interface PrimaryButtonProps {
     disabled?: boolean;
     widthP?: string;
     colorP?: string;
+    colorText?: string;
 }
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
@@ -15,6 +16,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
     disabled,
     widthP,
     colorP,
+    colorText,
 }) => {
     return (
         <button
@@ -24,6 +26,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
             style={{
                 width: widthP,
                 backgroundColor: disabled ? 'gray' : colorP,
+                color: colorText,
             }}
         >
             <span>{children}</span>

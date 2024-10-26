@@ -6,6 +6,7 @@ import CreateGroupModal from '../modal/createGroupModal';
 import { useGlobalContext } from '../../context';
 import { User } from '../../domain/user';
 import RedirectModal from '../modal/redirectModal';
+import { createAGroup, getUser } from '../../services/firebase';
 
 const CreateGroup: React.FC = () => {
     const { setGroups } = useGlobalContext();
@@ -51,31 +52,49 @@ const CreateGroup: React.FC = () => {
         //     });
         // }
 
-        const user: User = {
-            name: `User1`,
-            email: `teste@teste.com`,
-            phone: '123456789',
-        };
+        const users: User[] = [];
 
-        const newGroup: Group = {
-            name,
-            description,
-            date: new Date().toISOString().split('T')[0],
-            discipline: 'Projeto',
-            tags: [],
-            members: [],
-            owner: user,
-            id: `group${newGroups.length + 1}`,
-            maxMembers: parseInt(quantityMembers),
-            closedGroup: closedGroup,
-        };
+        for (let i = 0; i < 12; i++) {
+            const user: User = {
+                name: `User${i}`,
+                email: `teste${i}@teste.com`,
+                phone: '123456789',
+            };
+            users.push(user);
+        }
 
-        newGroups.push(newGroup);
+        getUser().then((user) => {
+            if (user) {
+                const newGroup: Group = {
+                    name,
+                    description,
+                    date: new Date().toISOString().split('T')[0],
+                    discipline: 'Projeto',
+                    tags: [],
+                    members: users,
+                    owner: user,
+                    id: localStorage.getItem('user') || '12 31231',
+                    maxMembers: parseInt(quantityMembers),
+                    closedGroup: closedGroup,
+                };
 
-        setGroups((prevGroups) => [...prevGroups, ...newGroups]);
-
-        setShowModal(false);
-        clearField();
+                createAGroup(newGroup)
+                    .then((response) => {
+                        if (response) {
+                            newGroups.push(newGroup);
+                            setGroups((prevGroups) => [
+                                ...prevGroups,
+                                ...newGroups,
+                            ]);
+                            setShowModal(false);
+                            clearField();
+                        }
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }
+        });
     }
 
     return (
