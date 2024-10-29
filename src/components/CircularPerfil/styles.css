@@ -1,0 +1,10 @@
+.form-user-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #006d9b;
+    margin: 0 auto;
+}

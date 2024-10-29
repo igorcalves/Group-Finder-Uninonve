@@ -2,19 +2,15 @@
     display: flex;
     flex-direction: column;
     border-radius: 9px;
-    padding: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    padding: 30px 10px;
+    border: 1px solid rgba(0, 0, 0, 0.103);
     gap: 5px;
-    background-color: #006d9b;
+    background-color: white;
     margin-bottom: 10px;
-    cursor: pointer;
-}
-.card-user:hover {
-    opacity: 0.8;
 }
 
 .card-user p {
-    color: white;
+    color: rgba(0, 0, 0, 0.753);
     display: block;
     margin: 0;
     padding: 0;
@@ -23,11 +19,43 @@
 .first-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 }
 
-.card-email {
-    color: white;
-    font-size: small;
+.card-name {
+    font-size: 18px;
+
+    font-weight: 600px;
+}
+
+.column-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.info-container {
+    display: flex;
+    flex-direction: row;
+    width: 60%;
+    justify-content: space-between;
+}
+
+.card-user .icons-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.card-profile {
+    display: flex;
+    padding: 10px 30px;
+    border-radius: 20px;
+    border: 1px solid #006d9b;
+    cursor: pointer;
+}
+
+.card-profile:hover {
+    background-color: #006d9b;
 }

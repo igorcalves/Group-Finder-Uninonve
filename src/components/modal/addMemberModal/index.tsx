@@ -5,12 +5,14 @@ import PrimaryButton from '../../button/primaryButton';
 import Close from '@mui/icons-material/Close';
 import { User } from '../../../domain/user';
 import { useGlobalContext } from '../../../context';
+import { Group } from '../../../domain/group';
 
 interface AddMemberModalProps {
     setShowModal: (show: boolean) => void;
     members: User[];
     setMembers: Dispatch<SetStateAction<User[]>>;
     groupId: string;
+    leaderGroup?: Group;
 }
 
 const AddMemberModal: React.FC<AddMemberModalProps> = ({
@@ -18,6 +20,7 @@ const AddMemberModal: React.FC<AddMemberModalProps> = ({
     members,
     setMembers,
     groupId,
+    leaderGroup,
 }) => {
     const [name, setName] = React.useState('');
     const [email, setEmail] = React.useState('');
@@ -34,12 +37,17 @@ const AddMemberModal: React.FC<AddMemberModalProps> = ({
         const updatedMembers = [...members, user];
         setMembers(updatedMembers);
 
-        const updatedGroups = groups.map((g) =>
-            g.id === groupId ? { ...g, members: updatedMembers } : g
-        );
+        if (leaderGroup) {
+            leaderGroup.members = updatedMembers;
+            setShowModal(false);
+        } else {
+            const updatedGroups = groups.map((g) =>
+                g.id === groupId ? { ...g, members: updatedMembers } : g
+            );
 
-        setGroups(updatedGroups);
-        setShowModal(false);
+            setGroups(updatedGroups);
+            setShowModal(false);
+        }
     };
 
     return (
@@ -54,15 +62,18 @@ const AddMemberModal: React.FC<AddMemberModalProps> = ({
                 </div>
                 <div className="modal-body">
                     <PrimaryInput
+                        label="Nome"
                         placeholder="Digite seu nome"
                         setContent={setName}
                     />
 
                     <PrimaryInput
+                        label="Email"
                         placeholder="Digite seu email"
                         setContent={setEmail}
                     />
                     <PrimaryInput
+                        label="Telefone"
                         placeholder="Digite seu telefone"
                         setContent={setPhone}
                     />

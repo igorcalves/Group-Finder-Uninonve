@@ -4,7 +4,7 @@ import './styles.css';
 import { maskToQuantityNumber } from '../../utils/inputValidator';
 
 interface InputProps {
-    placeholder: string;
+    placeholder?: string;
     setContent: Dispatch<SetStateAction<string>>;
     widthP?: string;
     heightP?: string;
@@ -14,6 +14,7 @@ interface InputProps {
     type?: string;
     maxLength?: number;
     content?: string;
+    disabled?: boolean;
 }
 
 const PrimaryInput: React.FC<InputProps> = ({
@@ -27,6 +28,7 @@ const PrimaryInput: React.FC<InputProps> = ({
     maxLength,
     content,
     heightP,
+    disabled,
 }) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (type === 'number') {
@@ -37,10 +39,7 @@ const PrimaryInput: React.FC<InputProps> = ({
 
     return (
         <>
-            <div
-                className="label-container"
-                style={{ width: widthP, height: heightP }}
-            >
+            <div className="label-container" style={{ width: widthP }}>
                 <p>{label}</p>
                 <input
                     className={classNames('custom-input', { error: hasError })}
@@ -50,6 +49,8 @@ const PrimaryInput: React.FC<InputProps> = ({
                     onBlur={onBlur}
                     value={content}
                     maxLength={maxLength}
+                    disabled={disabled}
+                    style={{ height: heightP }}
                 />
 
                 <p
