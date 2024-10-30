@@ -15,10 +15,14 @@ import {
     where,
     query,
     getDocs,
+    deleteDoc,
+    updateDoc,
+    onSnapshot,
 } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import { Group } from '../domain/group';
 import { User } from '../domain/user';
+import React from 'react';
 
 const auth = getAuth(appConfig);
 
@@ -125,11 +129,11 @@ export const getUser = async (): Promise<User | undefined> => {
             if (docSnap.exists()) {
                 return docSnap.data() as User;
             } else {
-                console.log('No such document!');
+                // console.log('No such document!');
                 return undefined;
             }
         } else {
-            console.log('No user in localStorage');
+            // console.log('No user in localStorage');
             return undefined;
         }
     } catch (error) {
@@ -207,4 +211,81 @@ export const getGroup = async (id: string): Promise<Group | undefined> => {
         console.error('Error getting group:', error);
         return undefined;
     }
+};
+
+export const deleteGroup = async (id: string): Promise<void> => {
+    try {
+        await deleteDoc(doc(db, 'groups', id));
+        toast.success('Grupo deletado com sucesso');
+    } catch (error) {
+        console.error('Error deleting group:', error);
+        toast.error('Erro ao deletar grupo');
+    }
+};
+
+export const updateGroup = async (
+    group: Group,
+    user: User,
+    id: string
+): Promise<void> => {
+    try {
+        await updateDoc(doc(db, 'groups', group.id), {
+            name: group.name,
+            description: group.description,
+            members: group.members,
+            owner: group.owner,
+            discipline: group.discipline,
+            date: group.date,
+            maxMembers: group.maxMembers,
+            closedGroup: group.closedGroup,
+        });
+
+        await updateDoc(doc(db, 'users', id), {
+            name: user.name,
+            email: user.email,
+            phone: user.phone,
+        });
+        toast.success('informações atualizadas com sucesso');
+    } catch (error) {
+        toast.error('Erro ao atualizar grupo');
+        // console.error('Error updating group:', error);
+    }
+};
+
+export const addMember = async (group: Group) => {
+    try {
+        await updateDoc(doc(db, 'groups', group.id), {
+            members: group.members,
+        });
+        toast.success('Membro adicionado com sucesso');
+    } catch (error) {
+        console.error('Error adding member:', error);
+        toast.error('Erro ao adicionar membro');
+    }
+};
+
+export const removeMember = async (group: Group) => {
+    try {
+        await updateDoc(doc(db, 'groups', group.id), {
+            members: group.members,
+        });
+        toast.success('Membro removido com sucesso');
+    } catch (error) {
+        console.error('Error removing member:', error);
+        toast.error('Erro ao remover membro');
+    }
+};
+
+export const updateInRealTime = (
+    setGroups: React.Dispatch<React.SetStateAction<Group[]>>
+) => {
+    const groupsRef = collection(db, 'groups');
+
+    return onSnapshot(groupsRef, (querySnapshot) => {
+        const groups: Group[] = [];
+        querySnapshot.forEach((doc) => {
+            groups.push(doc.data() as Group);
+        });
+        setGroups(groups);
+    });
 };

@@ -7,8 +7,14 @@ import { useGlobalContext } from '../../context';
 import { User } from '../../domain/user';
 import RedirectModal from '../modal/redirectModal';
 import { createAGroup, getUser } from '../../services/firebase';
+import PrimaryButton from '../button/primaryButton';
+import sapiens from '../../assets/images/sapiensCreateGroup.png';
 
-const CreateGroup: React.FC = () => {
+interface CreateGroupProps {
+    setGroup: React.Dispatch<React.SetStateAction<Group | undefined>>;
+}
+
+const CreateGroup: React.FC<CreateGroupProps> = ({ setGroup }) => {
     const { setGroups } = useGlobalContext();
     const [name, setName] = useState<string>('');
     const [description, setDescription] = useState<string>('');
@@ -16,6 +22,7 @@ const CreateGroup: React.FC = () => {
     const [showModal, setShowModal] = useState<boolean>(false);
     const [redirectModal, setRedirectModal] = useState<boolean>(false);
     const [closedGroup, setClosedGroup] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
     const loggedIn = localStorage.getItem('loggedIn');
     function clearField() {
         setName('');
@@ -31,6 +38,7 @@ const CreateGroup: React.FC = () => {
     }
 
     function createGroup() {
+        setLoading(true);
         const newGroups: Group[] = [];
         // for (let i = 0; i < 100; i++) {
         //     const user: User = {
@@ -73,7 +81,7 @@ const CreateGroup: React.FC = () => {
                     tags: [],
                     members: users,
                     owner: user,
-                    id: localStorage.getItem('user') || '12 31231',
+                    id: localStorage.getItem('user') || '',
                     maxMembers: parseInt(quantityMembers),
                     closedGroup: closedGroup,
                 };
@@ -88,10 +96,13 @@ const CreateGroup: React.FC = () => {
                             ]);
                             setShowModal(false);
                             clearField();
+                            setGroup(newGroup);
+                            setLoading(false);
                         }
                     })
                     .catch((error) => {
                         console.log(error);
+                        setLoading(false);
                     });
             }
         });
@@ -99,11 +110,17 @@ const CreateGroup: React.FC = () => {
 
     return (
         <>
-            <PostAdd className="icon-add-group" onClick={handlePostGroup} />
+            <img className="image-sapiens" src={sapiens}></img>
+            <p>Você não possui um grupo. que tal criar um?</p>
+
+            <PrimaryButton colorText="white" onClick={handlePostGroup}>
+                Criar grupo
+            </PrimaryButton>
             <CreateGroupModal
                 isVisible={showModal}
                 setName={setName}
                 name={name}
+                loading={loading}
                 description={description}
                 setDescription={setDescription}
                 handleButton={createGroup}

@@ -1,20 +1,47 @@
 import React, { useState } from 'react';
-
 import { User } from '../../../domain/user';
 import './styles.css';
 import CloseBtn from '@mui/icons-material/Close';
-
 import TextFieldInput from '../../input/TextAreaInput';
 import PrimaryButton from '../../button/primaryButton';
 import PrimaryInput from '../../input';
+import { BeatLoader } from 'react-spinners';
+import { removeMember } from '../../../services/firebase';
+import { Group } from '../../../domain/group';
+import { useGlobalContext } from '../../../context';
+
 interface PerfilUserModalProps {
     user: User;
+    group: Group | undefined;
     onClose: () => void;
 }
 
-const PerfilUserModal: React.FC<PerfilUserModalProps> = ({ user, onClose }) => {
+const PerfilUserModal: React.FC<PerfilUserModalProps> = ({
+    user,
+    onClose,
+    group,
+}) => {
     const [comment, setComment] = useState('');
     const [edit, setEdit] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const { groups, setGroups } = useGlobalContext();
+
+    const handleRemoveUser = async () => {
+        setLoading(true);
+        if (!group) return;
+        group.members = group.members?.filter((m) => m.email !== user.email);
+
+        await removeMember(group);
+
+        const updatedGroups = groups.map((g) =>
+            g.id === group.id ? { ...g, members: group.members } : g
+        );
+
+        setGroups(updatedGroups);
+        setLoading(false);
+        onClose();
+    };
+
     return (
         <div className="background-modal">
             <div className="perfil-modal-container">
@@ -74,9 +101,13 @@ const PerfilUserModal: React.FC<PerfilUserModalProps> = ({ user, onClose }) => {
                         <PrimaryButton
                             colorP="red"
                             colorText="white"
-                            onClick={onClose}
+                            onClick={handleRemoveUser}
                         >
-                            Remover do grupo
+                            {!loading ? (
+                                'Remover do grupo'
+                            ) : (
+                                <BeatLoader color="#fff" size={6} />
+                            )}
                         </PrimaryButton>
                     ) : (
                         <PrimaryButton

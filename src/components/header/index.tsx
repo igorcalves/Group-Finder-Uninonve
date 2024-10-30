@@ -22,12 +22,12 @@ const Header: React.FC = () => {
                 <h1>{headerTitle}</h1>
             </div>
             <div className="header-section right">
-                <CreateGroup />
+                {/* <CreateGroup />
                 <DropDownMenu
                     setHeaderTitle={setHeaderTitle}
                     content={DISCIPLINES}
                     IconComponent={MenuBook}
-                />
+                /> */}
                 {loggedIn && (
                     <Logout
                         onClick={() => {

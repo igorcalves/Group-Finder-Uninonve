@@ -4,6 +4,7 @@ import PrimaryInput from '../../input';
 import PrimaryButton from '../../button/primaryButton';
 import CloseBtn from '@mui/icons-material/Close';
 import { Checkbox } from '@mui/material';
+import { BeatLoader } from 'react-spinners';
 interface CreateGroupModalProps {
     isVisible: boolean;
     setName: Dispatch<SetStateAction<string>>;
@@ -16,6 +17,7 @@ interface CreateGroupModalProps {
     setQuantityMembers: Dispatch<SetStateAction<string>>;
     closedGroup: boolean;
     setClosedGroup: Dispatch<SetStateAction<boolean>>;
+    loading?: boolean;
 }
 
 const CreateGroupModal: React.FC<CreateGroupModalProps> = ({
@@ -30,6 +32,7 @@ const CreateGroupModal: React.FC<CreateGroupModalProps> = ({
     quantityMembers,
     closedGroup,
     setClosedGroup,
+    loading,
 }) => {
     const handleCheckboxChange = () => {
         setClosedGroup(!closedGroup);
@@ -78,12 +81,18 @@ const CreateGroupModal: React.FC<CreateGroupModalProps> = ({
                         disabled={
                             name === '' ||
                             description === '' ||
-                            quantityMembers === ''
+                            quantityMembers === '' ||
+                            loading
                         }
                         widthP="290px"
                         colorP="#006d9b"
+                        colorText="white"
                     >
-                        Criar Grupo
+                        {loading ? (
+                            <BeatLoader color="#fff" size={6} />
+                        ) : (
+                            'Criar grupo'
+                        )}
                     </PrimaryButton>
                 </div>
             </div>

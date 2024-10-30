@@ -132,3 +132,14 @@
 .perfil-modal-input {
     display: flex;
 }
+
+.create-group-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    flex: 0.9;
+    align-items: center;
+    justify-self: center;
+    border-radius: 13px;
+}

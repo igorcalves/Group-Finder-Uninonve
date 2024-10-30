@@ -4,7 +4,7 @@ import './styles.css';
 import PrimaryInput from '../input';
 import { useGlobalContext } from '../../context';
 import { Pagination } from '@mui/material';
-import { getGroups, getUser } from '../../services/firebase';
+import { getUser, updateInRealTime } from '../../services/firebase';
 import { User } from '../../domain/user';
 import UserDashboard from '../userDashboard';
 
@@ -23,14 +23,15 @@ const Body: React.FC = () => {
     };
 
     useEffect(() => {
-        getGroups().then((groups) => {
-            setGroups(groups);
-        });
         getUser().then((user) => {
             setUser(user);
-            console.log(user);
         });
     }, []);
+
+    useEffect(() => {
+        const unsubscribe = updateInRealTime(setGroups);
+        return () => unsubscribe();
+    }, [setGroups]);
 
     useEffect(() => {
         setFilteredGroups(handleSearch(search));
@@ -62,7 +63,6 @@ const Body: React.FC = () => {
         const endIndex = startIndex + groupsPerPage;
         return filteredGroups.slice(startIndex, endIndex);
     }, [page, filteredGroups]);
-
     return (
         <div className="body">
             {localStorage.getItem('loggedIn') ? (
@@ -80,7 +80,7 @@ const Body: React.FC = () => {
                         <div className="groups-cards">
                             {paginatedGroups.map((filteredGroup) => (
                                 <CardGroup
-                                    key={filteredGroup.id}
+                                    key={Date.now() + Math.random()}
                                     group={filteredGroup}
                                     onUpdateGroup={handleUpdateGroup}
                                 />

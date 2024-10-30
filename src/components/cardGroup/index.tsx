@@ -18,7 +18,6 @@ export function CardGroup({ group }: CardGroupProps) {
     const [showModal, setShowModal] = useState(false);
     const [showAddMemberModal, setShowAddMemberModal] = useState(false);
     const [showDescription, setShowDescription] = useState(false);
-    const sizeMax = 5;
 
     function addMember() {
         setShowAddMemberModal(true);
@@ -61,14 +60,17 @@ export function CardGroup({ group }: CardGroupProps) {
                 </PrimaryButton> */}
                 <PrimaryButton
                     onClick={addMember}
-                    disabled={!(members.length < sizeMax) || group.closedGroup}
+                    disabled={
+                        !(members.length < group.maxMembers) ||
+                        group.closedGroup
+                    }
                     widthP="270px"
                     colorP="#006d9b"
                     colorText="#fff"
                 >
                     {group.closedGroup
                         ? ' Grupo fechado'
-                        : members.length < sizeMax
+                        : members.length < group.maxMembers
                         ? 'Solicitar entrada'
                         : 'Lotado'}
                 </PrimaryButton>

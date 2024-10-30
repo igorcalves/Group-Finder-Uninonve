@@ -5,3 +5,9 @@
 .icon-add-group:hover {
     cursor: pointer;
 }
+
+.image-sapiens {
+    width: 50%;
+    object-fit: cover;
+    border-radius: 50%;
+}
