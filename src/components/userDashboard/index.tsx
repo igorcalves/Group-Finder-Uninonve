@@ -257,7 +257,6 @@ const UserDashboard: React.FC<UserDashboardProps> = ({ user }) => {
             ) : (
                 <div className="create-group-container">
                     <CreateGroup setGroup={setGroup} />
-                    updateGroup
                 </div>
             )}
             {selectedUser && (
