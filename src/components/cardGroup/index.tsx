@@ -85,6 +85,7 @@ export function CardGroup({ group }: CardGroupProps) {
                     members={members}
                     setMembers={setMembers}
                     groupId={group.id}
+                    leaderGroup={group}
                 />
             )}
             {showDescription && (
