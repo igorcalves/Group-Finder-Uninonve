@@ -1,57 +1,82 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './styles.css';
+import { Notification } from '../../domain/notifications';
 
 interface DropDownMenuProps {
-    setHeaderTitle: (headerTitle: string) => void;
-    content: string[];
+    content: Notification[] | undefined;
     IconComponent: React.ElementType;
 }
 
 const DropDownMenu: React.FC<DropDownMenuProps> = ({
-    setHeaderTitle,
     content,
     IconComponent,
 }) => {
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const dropdownRef = useRef<HTMLDivElement>(null);
+    const [isOpen, setIsOpen] = useState(false);
+    const menuRef = useRef<HTMLDivElement>(null);
+    const iconRef = useRef<HTMLDivElement>(null);
+    const [hasNewNotifications, setHasNewNotifications] = useState(false);
 
-    const toggleDropdown = () => {
-        setIsDropdownOpen(!isDropdownOpen);
+    const toggleMenu = () => {
+        setIsOpen((prevIsOpen) => !prevIsOpen);
+        content?.map((notification) => {
+            notification.read = true;
+        });
+
+        setHasNewNotifications(false);
     };
 
     const handleClickOutside = (event: MouseEvent) => {
         if (
-            dropdownRef.current &&
-            !dropdownRef.current.contains(event.target as Node)
+            menuRef.current &&
+            !menuRef.current.contains(event.target as Node) &&
+            iconRef.current &&
+            !iconRef.current.contains(event.target as Node)
         ) {
-            setIsDropdownOpen(false);
+            setIsOpen(false);
+        }
+    };
+
+    const hasNewNotification = () => {
+        if (content) {
+            const newNotifications = content.filter(
+                (notification) => !notification.read
+            );
+
+            setHasNewNotifications(newNotifications.length > 0);
         }
     };
 
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside);
+        hasNewNotification();
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
 
     return (
-        <div className="header-section right" ref={dropdownRef}>
-            <IconComponent className="icon-book" onClick={toggleDropdown} />
-            {isDropdownOpen && (
-                <div className="dropdown-menu">
+        <div className="header-section right">
+            <div className="icon-container" ref={iconRef}>
+                {hasNewNotifications && (
+                    <span className="notification-dot">*</span>
+                )}
+                <IconComponent className="icon-book" onClick={toggleMenu} />
+            </div>
+            <div
+                className={`dropdown-menu ${isOpen ? 'open' : 'closed'}`}
+                ref={menuRef}
+            >
+                {content && (
                     <ul>
-                        {content.map((discipline: string) => (
-                            <li
-                                key={discipline}
-                                onClick={() => setHeaderTitle(discipline)}
-                            >
-                                {discipline}
+                        {content.map((item) => (
+                            <li key={item.id}>
+                                <h3>{item.title}</h3>
+                                <p>{item.description}</p>
                             </li>
                         ))}
                     </ul>
-                </div>
-            )}
+                )}
+            </div>
         </div>
     );
 };

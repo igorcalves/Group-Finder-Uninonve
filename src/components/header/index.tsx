@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import './styles.css';
-import { MenuBook, Logout } from '@mui/icons-material';
-import { DISCIPLINES } from '../../constants/disciplines';
-import DropDownMenu from '../dropdownMenu/DropDownMenu';
-import CreateGroup from '../createGroup';
+import { Logout } from '@mui/icons-material';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useGlobalContext } from '../../context';
 import logo from '../../assets/images/logo2.png';
 import { logout } from '../../services/firebase';
+import DropDownMenu from '../dropdownMenu/DropDownMenu';
+import { notifications } from '../../utils/mocks';
 const Header: React.FC = () => {
     const [headerTitle, setHeaderTitle] = useState('');
+    const [notificationst, setNotifications] = useState<
+        Notification | undefined
+    >();
+
     const { setCurrentPage } = useGlobalContext();
     const loggedIn = localStorage.getItem('loggedIn');
     return (
@@ -28,13 +32,29 @@ const Header: React.FC = () => {
                     content={DISCIPLINES}
                     IconComponent={MenuBook}
                 /> */}
-                {loggedIn && (
-                    <Logout
+
+                {loggedIn ? (
+                    <div className="icons">
+                        <DropDownMenu
+                            content={notifications}
+                            IconComponent={NotificationsIcon}
+                        />
+                        <Logout
+                            onClick={() => {
+                                logout(() => setCurrentPage('login'));
+                            }}
+                            className="icon-logout"
+                        />
+                    </div>
+                ) : (
+                    <p
+                        className="login"
                         onClick={() => {
-                            logout(() => setCurrentPage('login'));
+                            setCurrentPage('login');
                         }}
-                        className="icon-logout"
-                    />
+                    >
+                        Login
+                    </p>
                 )}
             </div>
         </div>

@@ -14,7 +14,11 @@ import CircularPerfil from '../CircularPerfil';
 import AddMemberModal from '../modal/addMemberModal';
 import PrimaryButton from '../button/primaryButton';
 import DeleteModal from '../modal/deleteModal';
-import { deleteGroup, updateGroup } from '../../services/firebase';
+import {
+    deleteGroup,
+    updateGroup,
+    updateInRealTimeToDashboard,
+} from '../../services/firebase';
 import CreateGroup from '../createGroup';
 import { toast } from 'react-toastify';
 import { BeatLoader } from 'react-spinners';
@@ -38,12 +42,14 @@ const UserDashboard: React.FC<UserDashboardProps> = ({ user }) => {
     const [groupName, setGroupName] = useState('');
     const [deleteModal, setDeleteModal] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [dashBoardLoading, setDashBoardLoading] = useState(false);
     const handleCheckboxChange = () => {
         setClosedGroup(!closedGroup);
     };
     const id = localStorage.getItem('user');
 
     useEffect(() => {
+        setDashBoardLoading(true);
         if (user) {
             setEmail(user.email);
             setName(user.name);
@@ -54,13 +60,21 @@ const UserDashboard: React.FC<UserDashboardProps> = ({ user }) => {
             getGroup(id).then((group) => {
                 if (group) {
                     setGroup(group);
+                    setGroupName(group.name);
                     setDescription(group.description);
                     setDiscipline(group.discipline);
                     setMaxMembers(group.maxMembers?.toString());
                     setMembers(group.members?.map((member) => member) || []);
                     setClosedGroup(group.closedGroup);
+                    setDashBoardLoading(false);
                 }
             });
+
+            const unsubscribe = updateInRealTimeToDashboard(setGroup, id);
+
+            return () => {
+                unsubscribe();
+            };
         }
     }, [user]);
 
@@ -84,7 +98,7 @@ const UserDashboard: React.FC<UserDashboardProps> = ({ user }) => {
         }
     };
 
-    return (
+    return !dashBoardLoading ? (
         <div className="dashboard-container">
             <div className="form-user-container">
                 <h1 className="form-user-title">Informações do usuário</h1>
@@ -288,6 +302,10 @@ const UserDashboard: React.FC<UserDashboardProps> = ({ user }) => {
                     }
                 />
             ) : null}
+        </div>
+    ) : (
+        <div className="dashboard-loading-container">
+            <BeatLoader color="#01B3FF" size={40} />
         </div>
     );
 };

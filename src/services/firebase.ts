@@ -289,3 +289,14 @@ export const updateInRealTime = (
         setGroups(groups);
     });
 };
+
+export const updateInRealTimeToDashboard = (
+    setGroup: React.Dispatch<React.SetStateAction<Group | undefined>>,
+    id: string
+) => {
+    const groupRef = doc(db, 'groups', id);
+
+    return onSnapshot(groupRef, (doc) => {
+        setGroup(doc.data() as Group);
+    });
+};

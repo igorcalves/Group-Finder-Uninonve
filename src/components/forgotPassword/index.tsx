@@ -33,7 +33,7 @@ const FortgotPassword: React.FC<FortgotPasswordProps> = ({
                         setCurrentSate('login-enter');
                     }}
                 >
-                    voltar
+                    Cancelar
                 </PrimaryButton>
                 <PrimaryButton
                     widthP="295px"
