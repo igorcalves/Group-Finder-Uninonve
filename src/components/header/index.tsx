@@ -9,9 +9,6 @@ import DropDownMenu from '../dropdownMenu/DropDownMenu';
 import { notifications } from '../../utils/mocks';
 const Header: React.FC = () => {
     const [headerTitle, setHeaderTitle] = useState('');
-    const [notificationst, setNotifications] = useState<
-        Notification | undefined
-    >();
 
     const { setCurrentPage } = useGlobalContext();
     const loggedIn = localStorage.getItem('loggedIn');
