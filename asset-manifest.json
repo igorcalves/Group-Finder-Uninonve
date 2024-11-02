@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/Group-Finder-Uninonve/static/css/main.619d401f.css",
-    "main.js": "/Group-Finder-Uninonve/static/js/main.f0cec832.js",
+    "main.css": "/Group-Finder-Uninonve/static/css/main.89ffc436.css",
+    "main.js": "/Group-Finder-Uninonve/static/js/main.a0dd6feb.js",
     "static/media/sapiensCreateGroup.png": "/Group-Finder-Uninonve/static/media/sapiensCreateGroup.46c4d2287588e0ebba0e.png",
-    "static/media/sapiens.png": "/Group-Finder-Uninonve/static/media/sapiens.be6b8c3c6eb08471a25e.png",
+    "static/media/sapiens.svg": "/Group-Finder-Uninonve/static/media/sapiens.26efc35aa643d43e0a589e4d6437db7d.svg",
     "static/media/logo2.png": "/Group-Finder-Uninonve/static/media/logo2.0fef8a2b09955e190586.png",
     "index.html": "/Group-Finder-Uninonve/index.html",
-    "main.619d401f.css.map": "/Group-Finder-Uninonve/static/css/main.619d401f.css.map",
-    "main.f0cec832.js.map": "/Group-Finder-Uninonve/static/js/main.f0cec832.js.map"
+    "main.89ffc436.css.map": "/Group-Finder-Uninonve/static/css/main.89ffc436.css.map",
+    "main.a0dd6feb.js.map": "/Group-Finder-Uninonve/static/js/main.a0dd6feb.js.map"
   },
   "entrypoints": [
-    "static/css/main.619d401f.css",
-    "static/js/main.f0cec832.js"
+    "static/css/main.89ffc436.css",
+    "static/js/main.a0dd6feb.js"
   ]
 }
