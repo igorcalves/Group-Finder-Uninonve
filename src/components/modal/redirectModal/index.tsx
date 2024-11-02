@@ -47,6 +47,7 @@ const RedirectModal: React.FC<RedirectModalProps> = ({
                         onClick={() => handleCloseModal(false)}
                         widthP="200px"
                         colorP="#01b3ff"
+                        colorText="#fff"
                     >
                         Cancelar
                     </PrimaryButton>

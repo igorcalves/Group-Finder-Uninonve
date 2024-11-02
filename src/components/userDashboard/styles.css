@@ -152,3 +152,38 @@
     width: 100%;
     height: 70vh;
 }
+
+.members-header {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+}
+.members-header p {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.members-header p:nth-of-type(1) {
+    flex: 1;
+}
+
+.members-header p:nth-of-type(2) {
+    flex: 0.5;
+}
+.members-header p:nth-of-type(3) {
+    flex: 1.9;
+}
+
+.no-members {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.no-members h2 {
+    font-size: 24px;
+    font-weight: 600;
+}

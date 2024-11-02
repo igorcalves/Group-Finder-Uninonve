@@ -39,30 +39,53 @@ const LoginEnter: React.FC<LoginEnterProps> = ({
                 label="Senha"
             />
             <div className="create-count-container">
-                <a onClick={() => setCurrentSate('forgot-password')}>
+                <p
+                    className="forgot-password"
+                    onClick={() => setCurrentSate('forgot-password')}
+                >
                     Esqueci minha senha
-                </a>
+                </p>
             </div>
             <div className="btn-container ">
-                <PrimaryButton
-                    widthP="315px"
-                    onClick={handleLongin}
-                    disabled={
-                        email === '' ||
-                        password === '' ||
-                        !isValidEmail(email) ||
-                        !isValidPassword(password)
-                    }
-                >
-                    {loading ? <BeatLoader color="#fff" size={6} /> : 'Entrar'}
-                </PrimaryButton>
+                <div className="btn-container">
+                    <PrimaryButton
+                        widthP="315px"
+                        onClick={handleLongin}
+                        disabled={
+                            email === '' ||
+                            password === '' ||
+                            !isValidEmail(email) ||
+                            !isValidPassword(password)
+                        }
+                        colorText="#fff"
+                    >
+                        {loading ? (
+                            <BeatLoader color="#fff" size={6} />
+                        ) : (
+                            'Entrar'
+                        )}
+                    </PrimaryButton>
+                    <PrimaryButton
+                        widthP="315px"
+                        onClick={() => setCurrentPage('groups')}
+                        colorText="#fff"
+                        colorP="#006d9b"
+                    >
+                        Ver grupos
+                    </PrimaryButton>
+                </div>
                 <div className="forgot-count-container">
                     <p>
                         Não possui uma conta?{' '}
-                        <a onClick={() => setCurrentSate('signUp')}>
+                        <strong
+                            onClick={() => setCurrentSate('signUp')}
+                            style={{
+                                cursor: 'pointer',
+                            }}
+                        >
                             Cadastre-se
-                        </a>{' '}
-                    </p>
+                        </strong>
+                    </p>{' '}
                 </div>
             </div>
         </>

@@ -66,8 +66,8 @@ const UserDashboard: React.FC<UserDashboardProps> = ({ user }) => {
                     setMaxMembers(group.maxMembers?.toString());
                     setMembers(group.members?.map((member) => member) || []);
                     setClosedGroup(group.closedGroup);
-                    setDashBoardLoading(false);
                 }
+                setDashBoardLoading(false);
             });
 
             const unsubscribe = updateInRealTimeToDashboard(setGroup, id);
@@ -203,17 +203,32 @@ const UserDashboard: React.FC<UserDashboardProps> = ({ user }) => {
                             <p>Entrada Somente com convite</p>
                         </div>
                     </div>
-                    <h2>Membros</h2>
-                    <div className="members-container">
-                        {group?.members &&
-                            group?.members.map((member) => (
-                                <CardUser
-                                    user={member}
-                                    key={member.email}
-                                    openModal={() => setSelectedUser(member)}
-                                />
-                            ))}
-                    </div>
+                    {members && members.length > 0 ? (
+                        <>
+                            <h2>Membros</h2>
+                            <div className="members-header">
+                                <p>Nome</p>
+                                <p>Telefone</p>
+                                <p>Email</p>
+                            </div>
+                            <div className="members-container">
+                                {group?.members &&
+                                    group?.members.map((member) => (
+                                        <CardUser
+                                            user={member}
+                                            key={member.email}
+                                            openModal={() =>
+                                                setSelectedUser(member)
+                                            }
+                                        />
+                                    ))}
+                            </div>
+                        </>
+                    ) : (
+                        <div className="no-members">
+                            <h2>Sem membros</h2>
+                        </div>
+                    )}
                     {editGroup ? (
                         <PrimaryButton
                             onClick={() => {

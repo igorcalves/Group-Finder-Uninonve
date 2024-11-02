@@ -8,8 +8,6 @@ import { logout } from '../../services/firebase';
 import DropDownMenu from '../dropdownMenu/DropDownMenu';
 import { notifications } from '../../utils/mocks';
 const Header: React.FC = () => {
-    const [headerTitle, setHeaderTitle] = useState('');
-
     const { setCurrentPage } = useGlobalContext();
     const loggedIn = localStorage.getItem('loggedIn');
     return (
@@ -20,7 +18,7 @@ const Header: React.FC = () => {
                 </div>
             </div>
             <div className="header-section center">
-                <h1>{headerTitle}</h1>
+                <h1>Projeto</h1>
             </div>
             <div className="header-section right">
                 {/* <CreateGroup />

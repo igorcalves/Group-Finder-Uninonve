@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './styles.css';
 import { Notification } from '../../domain/notifications';
+import { notifications } from '../../utils/mocks';
+import { toast } from 'react-toastify';
 
 interface DropDownMenuProps {
     content: Notification[] | undefined;

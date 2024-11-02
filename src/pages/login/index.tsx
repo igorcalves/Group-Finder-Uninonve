@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './styles.css';
 
-import sapiens from '../../assets/images/sapiens.png';
+import sapiens from '../../assets/images/sapiens.svg';
 import { useGlobalContext } from '../../context';
 import LoginEnter from '../../components/loginEnter';
 import FortgotPassword from '../../components/forgotPassword';

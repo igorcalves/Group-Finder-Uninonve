@@ -87,6 +87,7 @@ const SignUp: React.FC<SignUpProps> = ({ setCurrentSate }) => {
             <PrimaryButton
                 widthP="290px"
                 onClick={() => setCurrentSate('login-enter')}
+                colorText="#fff"
             >
                 Cancelar
             </PrimaryButton>

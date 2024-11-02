@@ -62,14 +62,14 @@ const CreateGroup: React.FC<CreateGroupProps> = ({ setGroup }) => {
 
         const users: User[] = [];
 
-        for (let i = 0; i < 12; i++) {
-            const user: User = {
-                name: `User${i}`,
-                email: `teste${i}@teste.com`,
-                phone: '123456789',
-            };
-            users.push(user);
-        }
+        // for (let i = 0; i < 12; i++) {
+        //     const user: User = {
+        //         name: `User${i}`,
+        //         email: `teste${i}@teste.com`,
+        //         phone: '123456789',
+        //     };
+        //     users.push(user);
+        // }
 
         getUser().then((user) => {
             if (user) {

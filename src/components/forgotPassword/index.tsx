@@ -32,6 +32,7 @@ const FortgotPassword: React.FC<FortgotPasswordProps> = ({
                     onClick={() => {
                         setCurrentSate('login-enter');
                     }}
+                    colorText="#fff"
                 >
                     Cancelar
                 </PrimaryButton>

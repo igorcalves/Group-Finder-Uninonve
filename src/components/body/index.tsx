@@ -69,33 +69,45 @@ const Body: React.FC = () => {
                 <UserDashboard user={user} />
             ) : (
                 <>
-                    <div className="input-container">
-                        <PrimaryInput
-                            setContent={setSearch}
-                            placeholder="Buscar Grupos"
-                            widthP="800px"
-                        />
-                    </div>
-                    <div className="groups-cards-container">
-                        <div className="groups-cards">
-                            {paginatedGroups.map((filteredGroup) => (
-                                <CardGroup
-                                    key={Date.now() + Math.random()}
-                                    group={filteredGroup}
-                                    onUpdateGroup={handleUpdateGroup}
+                    {groups.length > 0 ? (
+                        <>
+                            <div className="input-container">
+                                <PrimaryInput
+                                    setContent={setSearch}
+                                    placeholder="Buscar Grupos"
+                                    widthP="800px"
                                 />
-                            ))}
+                            </div>
+                            <div className="groups-cards-container">
+                                <div className="groups-cards">
+                                    {paginatedGroups.map((filteredGroup) => (
+                                        <CardGroup
+                                            key={Date.now() + Math.random()}
+                                            group={filteredGroup}
+                                            onUpdateGroup={handleUpdateGroup}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="pagination-container">
+                                <Pagination
+                                    count={Math.ceil(
+                                        filteredGroups.length / groupsPerPage
+                                    )}
+                                    page={page}
+                                    onChange={handleChangePage}
+                                />
+                            </div>
+                        </>
+                    ) : (
+                        <div className="no-groups">
+                            <h1>Não há grupos cadastrados</h1>
+                            <p className="no-groups-description">
+                                Crie um grupo para começar a interagir com
+                                outras pessoas, basta fazer login.
+                            </p>
                         </div>
-                    </div>
-                    <div className="pagination-container">
-                        <Pagination
-                            count={Math.ceil(
-                                filteredGroups.length / groupsPerPage
-                            )}
-                            page={page}
-                            onChange={handleChangePage}
-                        />
-                    </div>
+                    )}
                 </>
             )}
         </div>
