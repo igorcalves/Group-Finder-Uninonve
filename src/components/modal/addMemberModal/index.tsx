@@ -6,20 +6,17 @@ import Close from '@mui/icons-material/Close';
 import { User } from '../../../domain/user';
 import { Group } from '../../../domain/group';
 import { addMember } from '../../../services/firebase';
-
+import {
+    isValidEmail,
+    isValidPhoneNumber,
+} from '../../../utils/inputValidator';
 interface AddMemberModalProps {
     setShowModal: (show: boolean) => void;
-    members: User[];
-    setMembers: Dispatch<SetStateAction<User[]>>;
-    groupId: string;
     leaderGroup?: Group;
 }
 
 const AddMemberModal: React.FC<AddMemberModalProps> = ({
     setShowModal,
-    members,
-    setMembers,
-    groupId,
     leaderGroup,
 }) => {
     const [name, setName] = React.useState('');
@@ -28,17 +25,14 @@ const AddMemberModal: React.FC<AddMemberModalProps> = ({
 
     const addNewMember = async () => {
         const user: User = {
+            id: Date.now().toString(),
             name,
             email,
             phone,
         };
 
-        const updatedMembers = [...members, user];
-        setMembers(updatedMembers);
-
         if (leaderGroup) {
-            leaderGroup.members?.unshift(user);
-            await addMember(leaderGroup);
+            await addMember(leaderGroup, email, user);
             setShowModal(false);
         } else {
             setShowModal(false);
@@ -58,6 +52,7 @@ const AddMemberModal: React.FC<AddMemberModalProps> = ({
                 <div className="modal-body">
                     <PrimaryInput
                         label="Nome"
+                        type="text"
                         placeholder="Digite seu nome"
                         setContent={setName}
                     />
@@ -65,20 +60,28 @@ const AddMemberModal: React.FC<AddMemberModalProps> = ({
                     <PrimaryInput
                         label="Email"
                         placeholder="Digite seu email"
+                        hasError={!isValidEmail(email)}
                         setContent={setEmail}
                     />
                     <PrimaryInput
                         label="Telefone"
                         placeholder="Digite seu telefone"
+                        type="phone"
+                        hasError={!isValidPhoneNumber(phone)}
                         setContent={setPhone}
                     />
                     <div className="button-container">
                         <PrimaryButton
                             disabled={
-                                name === '' || email === '' || phone === ''
+                                name === '' ||
+                                email === '' ||
+                                phone === '' ||
+                                !isValidEmail(email) ||
+                                !isValidPhoneNumber(phone)
                             }
                             onClick={addNewMember}
                             widthP="300px"
+                            colorText="white"
                             colorP="#006d9b"
                         >
                             Adicionar

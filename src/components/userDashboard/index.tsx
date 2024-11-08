@@ -22,6 +22,7 @@ import {
 import CreateGroup from '../createGroup';
 import { toast } from 'react-toastify';
 import { BeatLoader } from 'react-spinners';
+import { isValidPhoneNumber, isValidEmail } from '../../utils/inputValidator';
 interface UserDashboardProps {
     user: User | undefined;
 }
@@ -107,6 +108,7 @@ const UserDashboard: React.FC<UserDashboardProps> = ({ user }) => {
                     content={email}
                     placeholder="email"
                     disabled={!editGroup}
+                    hasError={!isValidEmail(email)}
                     label="Email"
                     setContent={setEmail}
                 />
@@ -114,12 +116,15 @@ const UserDashboard: React.FC<UserDashboardProps> = ({ user }) => {
                     content={name}
                     placeholder="Nome"
                     label="Nome"
+                    type="text"
                     disabled={!editGroup}
                     setContent={setName}
                 />
                 <PrimaryInput
                     label="Telefone"
                     placeholder="telefone"
+                    type="phone"
+                    hasError={!isValidPhoneNumber(phone)}
                     content={phone}
                     disabled={!editGroup}
                     setContent={setPhone}
@@ -174,6 +179,7 @@ const UserDashboard: React.FC<UserDashboardProps> = ({ user }) => {
                                 label="Disciplina"
                                 content={discipline}
                                 setContent={setDiscipline}
+                                type="text"
                             />
                         ) : (
                             <p>Disciplina: {discipline}</p>
@@ -231,6 +237,15 @@ const UserDashboard: React.FC<UserDashboardProps> = ({ user }) => {
                     )}
                     {editGroup ? (
                         <PrimaryButton
+                            disabled={
+                                loading ||
+                                !groupName ||
+                                !description ||
+                                !discipline ||
+                                !maxMembers ||
+                                !isValidEmail(email) ||
+                                !isValidPhoneNumber(phone)
+                            }
                             onClick={() => {
                                 if (user && id && group.members) {
                                     if (+maxMembers < group?.members?.length) {
@@ -299,10 +314,7 @@ const UserDashboard: React.FC<UserDashboardProps> = ({ user }) => {
             {showAddMemberModal && (
                 <AddMemberModal
                     setShowModal={setShowAddMemberModal}
-                    groupId={group?.id || ''}
-                    members={members || []}
                     leaderGroup={group}
-                    setMembers={setMembers}
                 />
             )}
             {deleteModal ? (

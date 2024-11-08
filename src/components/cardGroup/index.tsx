@@ -82,9 +82,6 @@ export function CardGroup({ group }: CardGroupProps) {
             {showAddMemberModal && (
                 <AddMemberModal
                     setShowModal={setShowAddMemberModal}
-                    members={members}
-                    setMembers={setMembers}
-                    groupId={group.id}
                     leaderGroup={group}
                 />
             )}

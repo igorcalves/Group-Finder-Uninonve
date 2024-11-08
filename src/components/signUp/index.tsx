@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PrimaryInput from '../input';
 import './styles.css';
 import PrimaryButton from '../button/primaryButton';
@@ -6,7 +6,11 @@ import PasswordInput from '../input/passwordInput.tsx';
 import { Register } from '../../domain/register';
 import { createAccount } from '../../services/firebase';
 import { toast } from 'react-toastify';
-import { isValidEmail, isValidPassword } from '../../utils/inputValidator';
+import {
+    isValidEmail,
+    isValidPassword,
+    isValidPhoneNumber,
+} from '../../utils/inputValidator';
 import { BeatLoader } from 'react-spinners';
 
 interface SignUpProps {
@@ -47,6 +51,7 @@ const SignUp: React.FC<SignUpProps> = ({ setCurrentSate }) => {
             <PrimaryInput
                 placeholder="Digite seu nome"
                 setContent={setName}
+                type="text"
                 label="Nome"
             />
             <PrimaryInput
@@ -57,6 +62,8 @@ const SignUp: React.FC<SignUpProps> = ({ setCurrentSate }) => {
             />
             <PrimaryInput
                 placeholder="Digite seu telefone"
+                type="phone"
+                hasError={!isValidPhoneNumber(phone)}
                 setContent={setPhone}
                 label="Telefone"
             />
@@ -94,6 +101,7 @@ const SignUp: React.FC<SignUpProps> = ({ setCurrentSate }) => {
             <PrimaryButton
                 widthP="290px"
                 onClick={handleSummit}
+                colorText="#fff"
                 disabled={
                     name === '' ||
                     email === '' ||

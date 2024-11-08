@@ -1,7 +1,11 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import classNames from 'classnames';
 import './styles.css';
-import { maskToQuantityNumber } from '../../utils/inputValidator';
+import {
+    maskToQuantityNumber,
+    maskToPhoneNumber,
+    onlyText,
+} from '../../utils/inputValidator';
 
 interface InputProps {
     placeholder?: string;
@@ -31,10 +35,23 @@ const PrimaryInput: React.FC<InputProps> = ({
     disabled,
 }) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (type === 'number') {
+        let inputValue = event.target.value.replace(/\D/g, '');
+
+        if (type === 'phone') {
+            if (inputValue.length > 11) {
+                inputValue = inputValue.slice(0, 11);
+            }
+            event.target.value = maskToPhoneNumber(inputValue);
+            setContent(event.target.value);
+        } else if (type === 'number') {
             maskToQuantityNumber(event);
+            setContent(event.target.value);
+        } else if (type === 'text') {
+            onlyText(event);
+            setContent(event.target.value);
+        } else {
+            setContent(event.target.value);
         }
-        setContent(event.target.value);
     };
 
     return (

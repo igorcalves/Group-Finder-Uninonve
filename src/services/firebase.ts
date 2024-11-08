@@ -252,11 +252,37 @@ export const updateGroup = async (
     }
 };
 
-export const addMember = async (group: Group) => {
+export const addMember = async (group: Group, email?: String, user?: User) => {
+    try {
+        if (email) {
+            const groupsRef = collection(db, 'groups');
+            const groupsSnapshot = await getDocs(groupsRef);
+
+            let emailExists = false;
+
+            groupsSnapshot.forEach((groupDoc) => {
+                const groupData = groupDoc.data() as Group;
+                if (
+                    groupData.members?.some((member) => member.email === email)
+                ) {
+                    emailExists = true;
+                }
+            });
+
+            if (emailExists) {
+                toast.error('Email já cadastrado no grupo');
+                return;
+            }
+        }
+    } catch (error) {
+        toast.error('Erro ao adicionar membro');
+        return;
+    }
     try {
         await updateDoc(doc(db, 'groups', group.id), {
             members: group.members,
         });
+        if (user) group.members?.unshift(user);
         toast.success('Membro adicionado com sucesso');
     } catch (error) {
         console.error('Error adding member:', error);
@@ -299,4 +325,16 @@ export const updateInRealTimeToDashboard = (
     return onSnapshot(groupRef, (doc) => {
         setGroup(doc.data() as Group);
     });
+};
+
+export const updateMember = (group: Group) => {
+    try {
+        updateDoc(doc(db, 'groups', group.id), {
+            members: group.members,
+        });
+
+        toast.success('Membro atualizado com sucesso');
+    } catch (error) {
+        toast.error('Erro ao atualizar membro');
+    }
 };
