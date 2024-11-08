@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './styles.css';
-import { Notification } from '../../domain/notifications';
-import { notifications } from '../../utils/mocks';
-import { toast } from 'react-toastify';
-
+import { GroupNotification } from '../../domain/notifications';
+import {
+    addMember,
+    getGroup,
+    updateNotificationInRealTime,
+} from '../../services/firebase';
+import { v4 as uuidv4 } from 'uuid';
 interface DropDownMenuProps {
-    content: Notification[] | undefined;
+    content?: GroupNotification[] | undefined;
     IconComponent: React.ElementType;
 }
 
@@ -17,13 +20,28 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({
     const menuRef = useRef<HTMLDivElement>(null);
     const iconRef = useRef<HTMLDivElement>(null);
     const [hasNewNotifications, setHasNewNotifications] = useState(false);
+    const [notifications, setNotifications] = useState<
+        GroupNotification[] | undefined
+    >();
+    const id = localStorage.getItem('user');
+
+    useEffect(() => {
+        if (id) updateNotificationInRealTime(setNotifications, id);
+
+        return () => {
+            if (id) updateNotificationInRealTime(setNotifications, id);
+        };
+    }, []);
 
     const toggleMenu = () => {
         setIsOpen((prevIsOpen) => !prevIsOpen);
-        content?.map((notification) => {
-            notification.read = true;
-        });
-
+        if (notifications) {
+            const updatedNotifications = notifications.map((notification) => ({
+                ...notification,
+                read: true,
+            }));
+            setNotifications(updatedNotifications);
+        }
         setHasNewNotifications(false);
     };
 
@@ -39,12 +57,31 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({
     };
 
     const hasNewNotification = () => {
-        if (content) {
-            const newNotifications = content.filter(
+        if (notifications) {
+            const newNotifications = notifications.filter(
                 (notification) => !notification.read
             );
-
             setHasNewNotifications(newNotifications.length > 0);
+        }
+    };
+
+    const removeNotification = (id: string) => {
+        if (notifications) {
+            const newNotifications = notifications.filter(
+                (notification) => notification.id !== id
+            );
+            setNotifications(newNotifications);
+        }
+    };
+
+    const addMemberToProject = (notification: GroupNotification) => {
+        if (id) {
+            getGroup(id).then((group) => {
+                if (group && group.members && notification.user) {
+                    group.members.push(notification.user);
+                    addMember(group, notification.user);
+                }
+            });
         }
     };
 
@@ -54,7 +91,7 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, []);
+    }, [notifications]);
 
     return (
         <div className="header-section right">
@@ -68,12 +105,38 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({
                 className={`dropdown-menu ${isOpen ? 'open' : 'closed'}`}
                 ref={menuRef}
             >
-                {content && (
+                {notifications && (
                     <ul>
-                        {content.map((item) => (
-                            <li key={item.id}>
+                        {notifications.map((item) => (
+                            <li key={uuidv4()}>
                                 <h3>{item.title}</h3>
-                                <p>{item.description}</p>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        gap: '20px',
+                                    }}
+                                >
+                                    <p>{item.description}</p>
+
+                                    <div className="container-buttons">
+                                        <p
+                                            onClick={() => {
+                                                addMemberToProject(item);
+                                                removeNotification(item.id);
+                                            }}
+                                        >
+                                            Aceitar
+                                        </p>
+                                        <p
+                                            onClick={() => {
+                                                removeNotification(item.id);
+                                            }}
+                                        >
+                                            Rejeitar
+                                        </p>
+                                    </div>
+                                </div>
                             </li>
                         ))}
                     </ul>

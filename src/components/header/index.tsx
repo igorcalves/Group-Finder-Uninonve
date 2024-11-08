@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './styles.css';
 import { Logout } from '@mui/icons-material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -6,10 +6,12 @@ import { useGlobalContext } from '../../context';
 import logo from '../../assets/images/logo2.png';
 import { logout } from '../../services/firebase';
 import DropDownMenu from '../dropdownMenu/DropDownMenu';
-import { notifications } from '../../utils/mocks';
+// import { getNotifications } from '../../services/firebase';
 const Header: React.FC = () => {
     const { setCurrentPage } = useGlobalContext();
+
     const loggedIn = localStorage.getItem('loggedIn');
+
     return (
         <div className="header">
             <div className="header-section left">
@@ -30,10 +32,7 @@ const Header: React.FC = () => {
 
                 {loggedIn ? (
                     <div className="icons">
-                        <DropDownMenu
-                            content={notifications}
-                            IconComponent={NotificationsIcon}
-                        />
+                        <DropDownMenu IconComponent={NotificationsIcon} />
                         <Logout
                             onClick={() => {
                                 logout(() => setCurrentPage('login'));

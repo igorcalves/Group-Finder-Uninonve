@@ -5,11 +5,12 @@ import PrimaryButton from '../../button/primaryButton';
 import Close from '@mui/icons-material/Close';
 import { User } from '../../../domain/user';
 import { Group } from '../../../domain/group';
-import { addMember } from '../../../services/firebase';
+import { addMember, addNewNotificationGroup } from '../../../services/firebase';
 import {
     isValidEmail,
     isValidPhoneNumber,
 } from '../../../utils/inputValidator';
+import { GroupNotification } from '../../../domain/notifications';
 interface AddMemberModalProps {
     setShowModal: (show: boolean) => void;
     leaderGroup?: Group;
@@ -32,7 +33,30 @@ const AddMemberModal: React.FC<AddMemberModalProps> = ({
         };
 
         if (leaderGroup) {
-            await addMember(leaderGroup, email, user);
+            const groupNotifications: GroupNotification = {
+                type: 'group',
+                id: Date.now().toString(),
+                date: new Date().toISOString(),
+                description: `${user.name} quer entrar no seu grupo`,
+                read: false,
+                title: 'Solicitação de entrada',
+                user,
+            };
+
+            const updatedLeaderGroup = { ...leaderGroup };
+            if (updatedLeaderGroup.groupNotifications) {
+                updatedLeaderGroup.groupNotifications.push(groupNotifications);
+            } else {
+                updatedLeaderGroup.groupNotifications = [groupNotifications];
+            }
+
+            if (updatedLeaderGroup.members) {
+                updatedLeaderGroup.members.push(user);
+            } else {
+                updatedLeaderGroup.members = [user];
+            }
+
+            await addMember(updatedLeaderGroup, user);
             setShowModal(false);
         } else {
             setShowModal(false);

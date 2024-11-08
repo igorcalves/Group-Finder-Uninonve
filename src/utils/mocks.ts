@@ -1,6 +1,6 @@
-import { Notification } from '../domain/notifications';
+import { GroupNotification } from '../domain/notifications';
 
-export const notifications: Notification[] = [
+export const notifications: GroupNotification[] = [
     {
         id: '1',
         title: 'Notificação 1',
@@ -8,6 +8,12 @@ export const notifications: Notification[] = [
         date: new Date().toISOString(),
         read: false,
         type: 'info',
+        user: {
+            id: '1',
+            name: 'Usuário 1',
+            email: 'teste1@mail.com',
+            phone: '123456789',
+        },
     },
     {
         id: '2',
@@ -16,6 +22,12 @@ export const notifications: Notification[] = [
         date: new Date().toISOString(),
         read: false,
         type: 'info',
+        user: {
+            id: '2',
+            name: 'Usuário 2',
+            email: 'teste2@mail.com',
+            phone: '123456789',
+        },
     },
     {
         id: '3',
@@ -24,6 +36,12 @@ export const notifications: Notification[] = [
         date: new Date().toISOString(),
         read: false,
         type: 'info',
+        user: {
+            id: '3',
+            name: 'Usuário 3',
+            email: 'teste3@mail.com',
+            phone: '323456789',
+        },
     },
 
     {

@@ -63,3 +63,24 @@
     transform: translate(50%, -50%);
     pointer-events: none;
 }
+
+.container-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.container-buttons p:nth-of-type(1) {
+    color: rgb(0, 155, 0);
+}
+
+.container-buttons p:nth-of-type(1):hover {
+    opacity: 0.5;
+}
+
+.container-buttons p:nth-of-type(2) {
+    color: rgb(245, 2, 2);
+}
+
+.container-buttons p:nth-of-type(2):hover {
+    opacity: 0.5;
+}

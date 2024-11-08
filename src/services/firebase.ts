@@ -23,6 +23,7 @@ import { toast } from 'react-toastify';
 import { Group } from '../domain/group';
 import { User } from '../domain/user';
 import React from 'react';
+import { GroupNotification } from '../domain/notifications';
 
 const auth = getAuth(appConfig);
 
@@ -252,9 +253,10 @@ export const updateGroup = async (
     }
 };
 
-export const addMember = async (group: Group, email?: String, user?: User) => {
+export const addMember = async (group: Group, user?: User) => {
     try {
-        if (email) {
+        if (user?.email) {
+            console.log('oi');
             const groupsRef = collection(db, 'groups');
             const groupsSnapshot = await getDocs(groupsRef);
 
@@ -263,7 +265,9 @@ export const addMember = async (group: Group, email?: String, user?: User) => {
             groupsSnapshot.forEach((groupDoc) => {
                 const groupData = groupDoc.data() as Group;
                 if (
-                    groupData.members?.some((member) => member.email === email)
+                    groupData.members?.some(
+                        (member) => member.email === user.email
+                    )
                 ) {
                     emailExists = true;
                 }
@@ -284,6 +288,7 @@ export const addMember = async (group: Group, email?: String, user?: User) => {
         });
         if (user) group.members?.unshift(user);
         toast.success('Membro adicionado com sucesso');
+        addNewNotificationGroup(group);
     } catch (error) {
         console.error('Error adding member:', error);
         toast.error('Erro ao adicionar membro');
@@ -327,6 +332,19 @@ export const updateInRealTimeToDashboard = (
     });
 };
 
+export const updateNotificationInRealTime = (
+    setNotifications: React.Dispatch<
+        React.SetStateAction<GroupNotification[] | undefined>
+    >,
+    id: string
+) => {
+    const notificationsRef = doc(db, 'groups', id);
+
+    return onSnapshot(notificationsRef, (doc) => {
+        setNotifications(doc.data()?.groupNotifications);
+    });
+};
+
 export const updateMember = (group: Group) => {
     try {
         updateDoc(doc(db, 'groups', group.id), {
@@ -336,5 +354,15 @@ export const updateMember = (group: Group) => {
         toast.success('Membro atualizado com sucesso');
     } catch (error) {
         toast.error('Erro ao atualizar membro');
+    }
+};
+
+export const addNewNotificationGroup = async (group: Group) => {
+    try {
+        await updateDoc(doc(db, 'groups', group.id), {
+            groupNotifications: group.groupNotifications,
+        });
+    } catch (error) {
+        console.error('Error adding notification:', error);
     }
 };
