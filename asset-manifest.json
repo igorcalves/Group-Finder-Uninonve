@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/Group-Finder-Uninonve/static/css/main.75b694cc.css",
-    "main.js": "/Group-Finder-Uninonve/static/js/main.b2d94f2a.js",
+    "main.css": "/Group-Finder-Uninonve/static/css/main.ef461d93.css",
+    "main.js": "/Group-Finder-Uninonve/static/js/main.0bde58f1.js",
     "static/media/sapiensCreateGroup.png": "/Group-Finder-Uninonve/static/media/sapiensCreateGroup.46c4d2287588e0ebba0e.png",
     "static/media/sapiens.svg": "/Group-Finder-Uninonve/static/media/sapiens.26efc35aa643d43e0a589e4d6437db7d.svg",
     "static/media/logo2.png": "/Group-Finder-Uninonve/static/media/logo2.0fef8a2b09955e190586.png",
     "index.html": "/Group-Finder-Uninonve/index.html",
-    "main.75b694cc.css.map": "/Group-Finder-Uninonve/static/css/main.75b694cc.css.map",
-    "main.b2d94f2a.js.map": "/Group-Finder-Uninonve/static/js/main.b2d94f2a.js.map"
+    "main.ef461d93.css.map": "/Group-Finder-Uninonve/static/css/main.ef461d93.css.map",
+    "main.0bde58f1.js.map": "/Group-Finder-Uninonve/static/js/main.0bde58f1.js.map"
   },
   "entrypoints": [
-    "static/css/main.75b694cc.css",
-    "static/js/main.b2d94f2a.js"
+    "static/css/main.ef461d93.css",
+    "static/js/main.0bde58f1.js"
   ]
 }
